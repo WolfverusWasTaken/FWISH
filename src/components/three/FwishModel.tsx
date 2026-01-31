@@ -2,20 +2,15 @@ import * as THREE from 'three'
 import React, { useMemo } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { STLLoader } from 'three-stdlib'
-import { Center } from '@react-three/drei'
 
 interface FwishModelProps {
   viewType?: 'top' | 'side' | 'front'
-  scale?: number
-  center?: boolean
   modelPath?: string
 }
 
 export function FwishModel({
   viewType = 'front',
-  modelPath = '/assets/Logistic_Model_V0.stl',
-  center = false,
-  scale = 1,
+  modelPath = 'assets/Logistic_Model_V0.stl',
   ...props
 }: FwishModelProps) {
   const group = React.useRef<THREE.Group>(null)
@@ -54,16 +49,6 @@ export function FwishModel({
     }
   }
 
-  const mesh = (
-    <mesh
-      geometry={geometry}
-      castShadow
-      receiveShadow
-      material={material}
-      scale={scale}
-    />
-  )
-
   return (
     <group
       ref={group}
@@ -71,7 +56,12 @@ export function FwishModel({
       dispose={null}
       {...props}
     >
-      {center ? <Center>{mesh}</Center> : mesh}
+      <mesh
+        geometry={geometry}
+        castShadow
+        receiveShadow
+        material={material}
+      />
     </group>
   )
 }

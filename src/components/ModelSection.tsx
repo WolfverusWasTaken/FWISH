@@ -1,6 +1,6 @@
 import { type FC, Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Center, PresentationControls, ContactShadows, Environment, Html } from '@react-three/drei';
+import { Center, PresentationControls, ContactShadows, Environment } from '@react-three/drei';
 import { FwishModel } from './three/FwishModel';
 
 const ModelSection: FC = () => {
@@ -32,21 +32,16 @@ const ModelSection: FC = () => {
                 {/* Logistic Transport Model */}
                 <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <Canvas shadows dpr={isMobile ? 1 : [1, 1.5]} camera={{ position: [0, 0, 8], fov: 25 }} gl={{ antialias: !isMobile }}>
-                        <Suspense fallback={
-                            <Html center>
-                                <div className="text-accent-blue font-mono text-[10px] animate-pulse">LOADING 3D DATA...</div>
-                            </Html>
-                        }>
+                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [0, 0, 12], fov: 35 }} gl={{ antialias: true }}>
+                        <Suspense fallback={null}>
                             <Environment preset="city" />
-                            <ambientLight intensity={0.25} />
+                            <ambientLight intensity={0.5} />
                             <directionalLight
-                                position={[-5, 6, 4]}
-                                intensity={2.5}
+                                position={[-5, 8, 4]}
+                                intensity={3}
                                 castShadow={!isMobile}
-                                shadow-mapSize={[256, 256]}
                             />
-                            <directionalLight position={[5, 3, -4]} intensity={0.6} />
+                            <directionalLight position={[5, 3, -4]} intensity={1} />
 
                             <PresentationControls
                                 global
@@ -55,8 +50,8 @@ const ModelSection: FC = () => {
                                 polar={[-Math.PI / 3, Math.PI / 3]}
                                 azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
                             >
-                                <Center scale={isMobile ? 0.0011 : 0.00075}>
-                                    <FwishModel modelPath="/assets/Logistic_Model_V0.stl" viewType="front" />
+                                <Center scale={isMobile ? 0.0008 : 0.0005}>
+                                    <FwishModel modelPath="assets/Logistic_Model_V0.stl" viewType="front" />
                                 </Center>
                             </PresentationControls>
                             <ContactShadows
@@ -80,21 +75,16 @@ const ModelSection: FC = () => {
                 {/* Watersport Model */}
                 <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <Canvas shadows dpr={isMobile ? 1 : [1, 1.5]} camera={{ position: [0, 0, 8], fov: 25 }} gl={{ antialias: !isMobile }}>
-                        <Suspense fallback={
-                            <Html center>
-                                <div className="text-accent-blue font-mono text-[10px] animate-pulse">LOADING 3D DATA...</div>
-                            </Html>
-                        }>
+                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [0, 0, 12], fov: 35 }} gl={{ antialias: true }}>
+                        <Suspense fallback={null}>
                             <Environment preset="city" />
-                            <ambientLight intensity={0.25} />
+                            <ambientLight intensity={0.5} />
                             <directionalLight
-                                position={[-5, 6, 4]}
-                                intensity={2.5}
+                                position={[-5, 8, 4]}
+                                intensity={3}
                                 castShadow={!isMobile}
-                                shadow-mapSize={[256, 256]}
                             />
-                            <directionalLight position={[5, 3, -4]} intensity={0.6} />
+                            <directionalLight position={[5, 3, -4]} intensity={1} />
 
                             <PresentationControls
                                 global
@@ -103,8 +93,8 @@ const ModelSection: FC = () => {
                                 polar={[-Math.PI / 3, Math.PI / 3]}
                                 azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
                             >
-                                <Center scale={isMobile ? 0.0011 : 0.00075}>
-                                    <FwishModel modelPath="/assets/Model_V0.1.stl" viewType="front" />
+                                <Center scale={isMobile ? 0.0008 : 0.0005}>
+                                    <FwishModel modelPath="assets/Model_V0.1.stl" viewType="front" />
                                 </Center>
                             </PresentationControls>
                             <ContactShadows
