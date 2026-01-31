@@ -87,7 +87,7 @@ const ModelSection: FC = () => {
 
                             {/* 🔒 Fixed pivot */}
                             <group
-                                scale={isMobile ? 0.0008 : 0.0006}
+                                scale={isMobile ? 0.0008 : 0.001}
                                 position={MODEL_PIVOT}
                             >
                                 <FwishModel
@@ -108,7 +108,9 @@ const ModelSection: FC = () => {
 
                     {/* Overlay UI */}
                     <div className="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[8px] md:text-[9px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.4em] border-l border-accent-blue pl-2 md:pl-3 pointer-events-none">
-                        VARIANT_LOGISTIC // 01
+                        VARIANT_LOGISTIC
+                        <br />
+                        REV: L-01 · DESIGN-VERIFIED · 2026-01
                     </div>
 
                     <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-right pointer-events-none">
@@ -171,7 +173,7 @@ const ModelSection: FC = () => {
 
                             {/* 🔒 Same pivot */}
                             <group
-                                scale={isMobile ? 0.0008 : 0.0006}
+                                scale={isMobile ? 0.0008 : 0.001}
                                 position={MODEL_PIVOT}
                             >
                                 <FwishModel
@@ -192,7 +194,9 @@ const ModelSection: FC = () => {
 
                     {/* Overlay UI */}
                     <div className="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[8px] md:text-[9px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.4em] border-l border-accent-blue pl-2 md:pl-3 pointer-events-none">
-                        VARIANT_WATERSPORT // 02
+                        VARIANT_WATERSPORT
+                        <br />
+                        REV: WS-01 · DESIGN-VERIFIED · 2026-01
                     </div>
 
                     <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-right pointer-events-none">
@@ -208,7 +212,7 @@ const ModelSection: FC = () => {
 
             {/* Footer */}
             <div className="w-full max-w-[1200px] mt-12 pt-8 border-t border-white/5 flex justify-between items-center opacity-30 font-mono text-[9px] uppercase tracking-[0.5em] text-white">
-                <span>Block-09 Geometry Verified // AUTH-772</span>
+                <span>INTERNAL DESIGN STUDY</span>
                 <span>© 2026 DESIGN BUREAU 42</span>
             </div>
         </section>
