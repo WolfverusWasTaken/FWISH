@@ -61,7 +61,7 @@ const ModelSection: FC = () => {
                                 zoomSpeed={1.2}
                             />
 
-                            <Center top scale={isMobile ? 0.0008 : 0.0006}>
+                            <Center scale={isMobile ? 0.0008 : 0.0006}>
                                 <FwishModel modelPath="assets/Logistic_Model_V0.stl" viewType="front" />
                             </Center>
 
@@ -115,7 +115,7 @@ const ModelSection: FC = () => {
                                 zoomSpeed={1.2}
                             />
 
-                            <Center top scale={isMobile ? 0.0008 : 0.0006}>
+                            <Center scale={isMobile ? 0.0008 : 0.0006}>
                                 <FwishModel modelPath="assets/Model_V0.1.stl" viewType="front" />
                             </Center>
 
