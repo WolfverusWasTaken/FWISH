@@ -14,7 +14,7 @@ interface FwishModelProps {
 export function FwishModel({
   viewType = 'front',
   center = true,
-  modelPath = './assets/Logistic_Model_V0.stl',
+  modelPath = 'assets/Logistic_Model_V0.stl',
   ...props
 }: FwishModelProps) {
   const group = React.useRef<THREE.Group>(null)

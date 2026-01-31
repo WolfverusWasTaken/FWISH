@@ -33,7 +33,7 @@ const ModelSection: FC = () => {
                                 azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
                             >
                                 <Center scale={2.5}>
-                                    <FwishModel modelPath="/assets/Logistic_Model_V0.stl" viewType="front" center={true} />
+                                    <FwishModel modelPath="assets/Logistic_Model_V0.stl" viewType="front" center={true} />
                                 </Center>
                             </PresentationControls>
                             <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={20} blur={2.5} far={4.5} />
@@ -61,7 +61,7 @@ const ModelSection: FC = () => {
                                 azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
                             >
                                 <Center scale={2.5}>
-                                    <FwishModel modelPath="/assets/Model_V0.1.stl" viewType="front" center={true} />
+                                    <FwishModel modelPath="assets/Model_V0.1.stl" viewType="front" center={true} />
                                 </Center>
                             </PresentationControls>
                             <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={20} blur={2.5} far={4.5} />

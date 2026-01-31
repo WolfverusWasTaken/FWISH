@@ -28,7 +28,8 @@
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.18",
     "three": "^0.182.0",
-    "vblob": "^1.1.0"
+    "vblob": "^1.1.0",
+    "three-stdlib": "^2.30.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

@@ -100,7 +100,7 @@ const ScienceSection: FC = () => {
                             fill="none"
                             stroke="var(--color-accent-blue)"
                             strokeWidth="1.2"
-                            strokeDasharray="6.6"
+                            strokeDasharray="6 6"
                             filter="url(#glow)"
                             initial={{ strokeDashoffset: 100 }}
                             animate={{ strokeDashoffset: 0 }}
