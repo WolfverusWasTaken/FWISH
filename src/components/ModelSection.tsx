@@ -1,6 +1,6 @@
 import { type FC, Suspense, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Center, PresentationControls, ContactShadows, Environment } from '@react-three/drei';
+import { Center, OrbitControls, ContactShadows, Environment, Html } from '@react-three/drei';
 import { FwishModel } from './three/FwishModel';
 
 const ModelSection: FC = () => {
@@ -30,12 +30,16 @@ const ModelSection: FC = () => {
             <div className="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 relative px-2 md:px-0">
 
                 {/* Logistic Transport Model */}
-                <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
+                <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group touch-none">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [0, 0, 12], fov: 35 }} gl={{ antialias: true }}>
-                        <Suspense fallback={null}>
-                            <Environment preset="city" />
-                            <ambientLight intensity={0.5} />
+                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [5, 3, 12], fov: 35 }} gl={{ antialias: true }}>
+                        <Suspense fallback={
+                            <Html center>
+                                <div className="text-accent-blue/40 font-mono text-[8px] tracking-widest animate-pulse">INIT_MESH...</div>
+                            </Html>
+                        }>
+                            <Environment preset={isMobile ? "studio" : "city"} />
+                            <ambientLight intensity={isMobile ? 0.8 : 0.5} />
                             <directionalLight
                                 position={[-5, 8, 4]}
                                 intensity={3}
@@ -43,17 +47,22 @@ const ModelSection: FC = () => {
                             />
                             <directionalLight position={[5, 3, -4]} intensity={1} />
 
-                            <PresentationControls
-                                global
-                                snap={false}
-                                rotation={[0, 0.3, 0]}
-                                polar={[-Math.PI / 3, Math.PI / 3]}
-                                azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
-                            >
-                                <Center scale={isMobile ? 0.0008 : 0.0005}>
-                                    <FwishModel modelPath="assets/Logistic_Model_V0.stl" viewType="front" />
-                                </Center>
-                            </PresentationControls>
+                            <OrbitControls
+                                enableZoom={true}
+                                enablePan={false}
+                                minDistance={5}
+                                maxDistance={20}
+                                makeDefault
+                                autoRotate={false}
+                                enableDamping={true}
+                                rotateSpeed={0.8}
+                                zoomSpeed={1.2}
+                            />
+
+                            <Center scale={isMobile ? 0.0008 : 0.0005}>
+                                <FwishModel modelPath="assets/Logistic_Model_V0.stl" viewType="front" />
+                            </Center>
+
                             <ContactShadows
                                 position={[0, -2.5, 0]}
                                 opacity={0.4}
@@ -63,22 +72,26 @@ const ModelSection: FC = () => {
                             />
                         </Suspense>
                     </Canvas>
-                    <div className="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[8px] md:text-[9px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.4em] border-l border-accent-blue pl-2 md:pl-3">
+                    <div className="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[8px] md:text-[9px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.4em] border-l border-accent-blue pl-2 md:pl-3 pointer-events-none">
                         VARIANT_LOGISTIC // 01
                     </div>
-                    <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-right">
+                    <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-right pointer-events-none">
                         <div className="text-accent-blue font-mono text-[9px] md:text-[10px] mb-1 tracking-widest md:tracking-[0.3em] font-bold uppercase">Logistic Transport Model</div>
                         <div className="text-white/20 text-[7px] md:text-[8px] font-mono leading-relaxed uppercase tracking-widest md:tracking-[0.2em]">Bulk Cargo Configuration</div>
                     </div>
                 </div>
 
                 {/* Watersport Model */}
-                <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
+                <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group touch-none">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [0, 0, 12], fov: 35 }} gl={{ antialias: true }}>
-                        <Suspense fallback={null}>
-                            <Environment preset="city" />
-                            <ambientLight intensity={0.5} />
+                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [5, 3, 12], fov: 35 }} gl={{ antialias: true }}>
+                        <Suspense fallback={
+                            <Html center>
+                                <div className="text-accent-blue/40 font-mono text-[8px] tracking-widest animate-pulse">INIT_MESH...</div>
+                            </Html>
+                        }>
+                            <Environment preset={isMobile ? "studio" : "city"} />
+                            <ambientLight intensity={isMobile ? 0.8 : 0.5} />
                             <directionalLight
                                 position={[-5, 8, 4]}
                                 intensity={3}
@@ -86,17 +99,22 @@ const ModelSection: FC = () => {
                             />
                             <directionalLight position={[5, 3, -4]} intensity={1} />
 
-                            <PresentationControls
-                                global
-                                snap={false}
-                                rotation={[0, 0.3, 0]}
-                                polar={[-Math.PI / 3, Math.PI / 3]}
-                                azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
-                            >
-                                <Center scale={isMobile ? 0.0008 : 0.0005}>
-                                    <FwishModel modelPath="assets/Model_V0.1.stl" viewType="front" />
-                                </Center>
-                            </PresentationControls>
+                            <OrbitControls
+                                enableZoom={true}
+                                enablePan={false}
+                                minDistance={5}
+                                maxDistance={20}
+                                makeDefault
+                                autoRotate={false}
+                                enableDamping={true}
+                                rotateSpeed={0.8}
+                                zoomSpeed={1.2}
+                            />
+
+                            <Center scale={isMobile ? 0.0008 : 0.0005}>
+                                <FwishModel modelPath="assets/Model_V0.1.stl" viewType="front" />
+                            </Center>
+
                             <ContactShadows
                                 position={[0, -2.5, 0]}
                                 opacity={0.4}
@@ -106,10 +124,10 @@ const ModelSection: FC = () => {
                             />
                         </Suspense>
                     </Canvas>
-                    <div className="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[8px] md:text-[9px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.4em] border-l border-accent-blue pl-2 md:pl-3">
+                    <div className="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[8px] md:text-[9px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.4em] border-l border-accent-blue pl-2 md:pl-3 pointer-events-none">
                         VARIANT_WATERSPORT // 02
                     </div>
-                    <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-right">
+                    <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-right pointer-events-none">
                         <div className="text-accent-blue font-mono text-[9px] md:text-[10px] mb-1 tracking-widest md:tracking-[0.3em] font-bold uppercase">One Seater Watersport Model</div>
                         <div className="text-white/20 text-[7px] md:text-[8px] font-mono leading-relaxed uppercase tracking-widest md:tracking-[0.2em]">Personal Agility Platform</div>
                     </div>
