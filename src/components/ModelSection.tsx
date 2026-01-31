@@ -30,7 +30,7 @@ const ModelSection: FC = () => {
 
                         <PresentationControls
                             global
-                            snap={true}
+                            snap={false}
                             rotation={[0, 0.3, 0]}
                             polar={[-Math.PI / 3, Math.PI / 3]}
                             azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
