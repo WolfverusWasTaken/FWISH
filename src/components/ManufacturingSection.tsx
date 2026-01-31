@@ -19,8 +19,8 @@ const ManufacturingSection: FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="text-accent-green font-mono text-xs mb-4 flex items-center gap-2">
-                        <span className="w-8 h-px bg-accent-green" />
+                    <div className="text-accent-blue font-mono text-xs mb-4 flex items-center gap-2">
+                        <span className="w-8 h-px bg-accent-blue" />
                         SUBTRACTIVE FABRICATION
                     </div>
                     <h2 className="text-4xl font-black mb-6 uppercase">In-House <br /><span className="text-accent-blue">Manufacturing</span></h2>
