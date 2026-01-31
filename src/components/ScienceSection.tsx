@@ -13,14 +13,15 @@ const ScienceSection: FC = () => {
                 >
                     <div className="text-accent-blue font-mono text-xs mb-4 flex items-center gap-2">
                         <span className="w-8 h-px bg-accent-blue" />
-                        AERODYNAMIC PHENOMENON
+                        Aerodynamics, deliberately constrained.
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">The Science of <br /><span className="text-accent-blue">Ground Effect</span></h2>
+                    <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">ENGINEERED FOR <br /><span className="text-accent-blue">GROUND EFFECT</span></h2>
                     <p className="text-white/60 leading-relaxed mb-8 font-light text-lg">
-                        FWISH utilizes the high-pressure air cushion that forms between a wing and the ground.
-                        By flying within one chord length of the surface, we reduce induced drag and dramatically
-                        increase the Lift-to-Drag ratio, achieving fuel efficiency levels 3x greater than
-                        conventional aircraft.
+                        FWISH is engineered to operate inside ground effect, where aerodynamic losses collapse and efficiency peaks.
+By flying within one chord length of the surface, a stable high-pressure air cushion forms beneath the wing—suppressing wingtip vortices, reducing induced drag, and fundamentally shifting the lift–drag balance.
+
+The result is not incremental improvement.
+It is up to 3× higher lift-to-drag efficiency than conventional free-flight aircraft, achieved through controlled proximity—not brute force.
                     </p>
 
 
@@ -28,15 +29,16 @@ const ScienceSection: FC = () => {
 
                 <div className="relative h-[400px] glass rounded-3xl overflow-hidden border border-white/5 flex items-center justify-center">
                     {/* SVG Airflow Animation */}
-                    <svg width="100%" height="100%" viewBox="0 0 400 300" className="opacity-80">
+                    <svg width="100%" height="100%" viewBox="-20 -20 440 340" className="opacity-80">
                         {/* Wing Profile */}
-                        <path
-                            d="M 50.00,160.01 L 50.05,159.74 L 50.28,159.27 L 50.82,158.58 L 52.09,157.46 L 53.54,156.47 L 57.56,154.45 L 63.03,152.40 L 69.88,150.36 L 78.03,148.37 L 87.41,146.46 L 97.89,144.69 L 109.39,143.06 L 121.77,141.63 L 134.92,140.40 L 148.69,139.41 L 162.94,138.67 L 177.51,138.19 L 192.27,137.99 L 207.06,138.07 L 221.71,138.45 L 236.09,139.13 L 250.03,140.12 L 263.38,141.46 L 276.08,143.23 L 288.21,145.37 L 299.70,147.68 L 310.39,150.00 L 320.11,152.21 L 328.68,154.24 L 335.93,156.06 L 341.76,157.65 L 346.17,158.94 L 349.00,159.75 L 350.00,160.00 L 350.00,160.00 L 348.96,159.82 L 345.78,159.35 L 340.43,158.75 L 332.97,158.25 L 323.59,158.01 L 312.56,158.12 L 300.11,158.58 L 286.47,159.40 L 271.89,160.54 L 256.63,161.95 L 240.89,163.55 L 224.91,165.26 L 208.88,166.98 L 192.98,168.64 L 177.38,170.15 L 162.23,171.43 L 162.23,171.43 L 147.67,172.43 L 133.81,173.08 L 120.76,173.36 L 108.64,173.21 L 97.48,172.61 L 87.28,171.58 L 78.10,170.26 L 70.06,168.72 L 63.25,167.03 L 57.77,165.25 L 53.70,163.41 L 52.19,162.48 L 50.88,161.41 L 50.31,160.74 L 50.06,160.29 L 50.00,160.01 Z"
-                            fill="rgba(0, 163, 255, 0.2)"
-                            stroke="var(--color-accent-blue)"
-                            strokeWidth="2"
-                        />
-
+                        <g transform="rotate(5 200 160)">
+                            <path
+                                d="M 50.00,160.01 L 50.05,159.74 L 50.28,159.27 L 50.82,158.58 L 52.09,157.46 L 53.54,156.47 L 57.56,154.45 L 63.03,152.40 L 69.88,150.36 L 78.03,148.37 L 87.41,146.46 L 97.89,144.69 L 109.39,143.06 L 121.77,141.63 L 134.92,140.40 L 148.69,139.41 L 162.94,138.67 L 177.51,138.19 L 192.27,137.99 L 207.06,138.07 L 221.71,138.45 L 236.09,139.13 L 250.03,140.12 L 263.38,141.46 L 276.08,143.23 L 288.21,145.37 L 299.70,147.68 L 310.39,150.00 L 320.11,152.21 L 328.68,154.24 L 335.93,156.06 L 341.76,157.65 L 346.17,158.94 L 349.00,159.75 L 350.00,160.00 L 350.00,160.00 L 348.96,159.82 L 345.78,159.35 L 340.43,158.75 L 332.97,158.25 L 323.59,158.01 L 312.56,158.12 L 300.11,158.58 L 286.47,159.40 L 271.89,160.54 L 256.63,161.95 L 240.89,163.55 L 224.91,165.26 L 208.88,166.98 L 192.98,168.64 L 177.38,170.15 L 162.23,171.43 L 162.23,171.43 L 147.67,172.43 L 133.81,173.08 L 120.76,173.36 L 108.64,173.21 L 97.48,172.61 L 87.28,171.58 L 78.10,170.26 L 70.06,168.72 L 63.25,167.03 L 57.77,165.25 L 53.70,163.41 L 52.19,162.48 L 50.88,161.41 L 50.31,160.74 L 50.06,160.29 L 50.00,160.01 Z"
+                                fill="rgba(0, 163, 255, 0.2)"
+                                stroke="var(--color-accent-blue)"
+                                strokeWidth="2"
+                            />
+                        </g>
                         <defs>
                             <pattern id="groundPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
                                 <line x1="0" y1="40" x2="40" y2="0" stroke="white" strokeWidth="0.5" strokeOpacity="0.05" />
@@ -60,7 +62,7 @@ const ScienceSection: FC = () => {
 
                         {/* Ground Surface */}
                         <motion.rect
-                            x="0" y="270" width="400" height="30"
+                            x="-100" y="270" width="600" height="30"
                             fill="url(#groundGradient)"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
@@ -69,7 +71,7 @@ const ScienceSection: FC = () => {
                         <line x1="0" y1="270" x2="400" y2="270" stroke="var(--color-accent-blue)" strokeWidth="2" strokeOpacity="0.5" filter="url(#glow)" />
 
                         {/* Mirror Airfoil Effect */}
-                        <g transform="translate(0, 540) scale(1, -1)" opacity="0.15">
+                        <g transform="translate(0, 540) scale(1, -1) rotate(5 200 160)" opacity="0.15">
                             <path
                                 d="M 50.00,160.01 L 50.05,159.74 L 50.28,159.27 L 50.82,158.58 L 52.09,157.46 L 53.54,156.47 L 57.56,154.45 L 63.03,152.40 L 69.88,150.36 L 78.03,148.37 L 87.41,146.46 L 97.89,144.69 L 109.39,143.06 L 121.77,141.63 L 134.92,140.40 L 148.69,139.41 L 162.94,138.67 L 177.51,138.19 L 192.27,137.99 L 207.06,138.07 L 221.71,138.45 L 236.09,139.13 L 250.03,140.12 L 263.38,141.46 L 276.08,143.23 L 288.21,145.37 L 299.70,147.68 L 310.39,150.00 L 320.11,152.21 L 328.68,154.24 L 335.93,156.06 L 341.76,157.65 L 346.17,158.94 L 349.00,159.75 L 350.00,160.00 L 350.00,160.00 L 348.96,159.82 L 345.78,159.35 L 340.43,158.75 L 332.97,158.25 L 323.59,158.01 L 312.56,158.12 L 300.11,158.58 L 286.47,159.40 L 271.89,160.54 L 256.63,161.95 L 240.89,163.55 L 224.91,165.26 L 208.88,166.98 L 192.98,168.64 L 177.38,170.15 L 162.23,171.43 L 162.23,171.43 L 147.67,172.43 L 133.81,173.08 L 120.76,173.36 L 108.64,173.21 L 97.48,172.61 L 87.28,171.58 L 78.10,170.26 L 70.06,168.72 L 63.25,167.03 L 57.77,165.25 L 53.70,163.41 L 52.19,162.48 L 50.88,161.41 L 50.31,160.74 L 50.06,160.29 L 50.00,160.01 Z"
                                 fill="var(--color-accent-blue)"
@@ -104,7 +106,7 @@ const ScienceSection: FC = () => {
                             filter="url(#glow)"
                             initial={{ strokeDashoffset: 100 }}
                             animate={{ strokeDashoffset: 0 }}
-                            transition={{ duration: 1.2, repeat: Infinity, ease: "linear" }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                             style={{ opacity: 0.2 }}
                         />
 
@@ -143,7 +145,7 @@ const ScienceSection: FC = () => {
 
                     <div className="absolute top-4 right-4 flex flex-col gap-2">
                         <div className="flex items-center gap-2 text-[8px] text-accent-blue bg-accent-blue/10 px-2 py-1 rounded-full uppercase font-mono animate-pulse">
-                            High Pressure Trap Active
+                            HIGH-PRESSURE ZONE LOCKED
                         </div>
                     </div>
                 </div>

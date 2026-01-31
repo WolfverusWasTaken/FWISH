@@ -38,15 +38,15 @@ const ModelSection: FC = () => {
                                 <div className="text-accent-blue/40 font-mono text-[8px] tracking-widest animate-pulse">INIT_MESH...</div>
                             </Html>
                         }>
-                            <Environment preset={isMobile ? "studio" : "city"} />
-                            <ambientLight intensity={0.2} color="#00A3FF" />
-                            <ambientLight intensity={isMobile ? 0.7 : 0.4} />
+                            <Environment preset={isMobile ? "studio" : "city"} environmentIntensity={0.5} />
+                            <ambientLight intensity={1.2} color="#00A3FF" />
+                            <ambientLight intensity={isMobile ? 0.6 : 0.4} />
                             <directionalLight
                                 position={[-5, 8, 4]}
-                                intensity={2.5}
+                                intensity={3}
                                 castShadow={!isMobile}
                             />
-                            <directionalLight position={[5, 3, -4]} intensity={0.8} color="#00A3FF" />
+                            <directionalLight position={[5, 3, -4]} intensity={2.5} color="#00A3FF" />
 
                             <OrbitControls
                                 enableZoom={true}
@@ -92,15 +92,15 @@ const ModelSection: FC = () => {
                                 <div className="text-accent-blue/40 font-mono text-[8px] tracking-widest animate-pulse">INIT_MESH...</div>
                             </Html>
                         }>
-                            <Environment preset={isMobile ? "studio" : "city"} />
-                            <ambientLight intensity={0.2} color="#00A3FF" />
-                            <ambientLight intensity={isMobile ? 0.7 : 0.4} />
+                            <Environment preset={isMobile ? "studio" : "city"} environmentIntensity={0.5} />
+                            <ambientLight intensity={1.2} color="#00A3FF" />
+                            <ambientLight intensity={isMobile ? 0.6 : 0.4} />
                             <directionalLight
                                 position={[-5, 8, 4]}
-                                intensity={2.5}
+                                intensity={3}
                                 castShadow={!isMobile}
                             />
-                            <directionalLight position={[5, 3, -4]} intensity={0.8} color="#00A3FF" />
+                            <directionalLight position={[5, 3, -4]} intensity={2.5} color="#00A3FF" />
 
                             <OrbitControls
                                 enableZoom={true}
