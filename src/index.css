@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #000000;
+  --color-surface: #050505;
+  --color-accent-blue: #00A3FF;
+  --color-accent-green: #00FF41;
+  --color-glass: rgba(5, 5, 5, 0.7);
+  --color-border-glow: rgba(0, 163, 255, 0.3);
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+@layer base {
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    color-scheme: dark;
+    background-color: var(--color-background);
+    color: #ffffff;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: var(--font-sans);
+  }
+
+  section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-blue);
+  }
+}
+
+@layer utilities {
+  .glass {
+    backdrop-filter: blur(12px);
+    background: var(--color-glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glow-border {
+    box-shadow: 0 0 10px var(--color-border-glow);
+  }
+
+  .text-shadow-blue {
+    text-shadow: 0 0 8px var(--color-accent-blue);
+  }
+
+  .text-shadow-green {
+    text-shadow: 0 0 8px var(--color-accent-green);
+  }
+}
