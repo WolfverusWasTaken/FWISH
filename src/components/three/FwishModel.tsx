@@ -6,6 +6,7 @@ import { STLLoader } from 'three-stdlib'
 interface FwishModelProps {
   viewType?: 'top' | 'side' | 'front'
   scale?: number
+  center?: boolean
   modelPath?: string
 }
 

@@ -32,7 +32,7 @@ const ModelSection: FC = () => {
                 {/* Logistic Transport Model */}
                 <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [0, 0, 8], fov: 25 }}>
+                    <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 25 }}>
                         <Suspense fallback={
                             <Html center>
                                 <div className="text-accent-blue font-mono text-[10px] animate-pulse">LOADING 3D DATA...</div>
@@ -69,7 +69,7 @@ const ModelSection: FC = () => {
                 {/* Watersport Model */}
                 <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [0, 0, 8], fov: 25 }}>
+                    <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 25 }}>
                         <Suspense fallback={
                             <Html center>
                                 <div className="text-accent-blue font-mono text-[10px] animate-pulse">LOADING 3D DATA...</div>
