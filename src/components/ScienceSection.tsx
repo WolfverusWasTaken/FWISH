@@ -15,7 +15,7 @@ const ScienceSection: FC = () => {
                         <span className="w-8 h-px bg-accent-blue" />
                         AERODYNAMIC PHENOMENON
                     </div>
-                    <h2 className="text-5xl font-black mb-6 uppercase tracking-tight">The Science of <br /><span className="text-accent-blue">Ground Effect</span></h2>
+                    <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">The Science of <br /><span className="text-accent-blue">Ground Effect</span></h2>
                     <p className="text-white/60 leading-relaxed mb-8 font-light text-lg">
                         FWISH utilizes the high-pressure air cushion that forms between a wing and the ground.
                         By flying within one chord length of the surface, we reduce induced drag and dramatically

@@ -30,7 +30,7 @@ const PressureSection: FC = () => {
                         <span className="w-8 h-px bg-accent-blue" />
                         VIRTUAL WIND TUNNEL
                     </div>
-                    <h2 className="text-5xl font-black mb-6 uppercase tracking-tighter">Pressure <br /><span className="text-accent-blue">Distribution</span></h2>
+                    <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tighter">Pressure <br /><span className="text-accent-blue">Distribution</span></h2>
                     <p className="text-white/60 leading-relaxed font-mono text-base space-y-6">
                         <span className="block">{">"} Analyzing high-pressure trap zones beneath the chord line.</span>
                         <span className="block">{">"} Computational Fluid Dynamics (CFD) optimization for Block 09.</span>

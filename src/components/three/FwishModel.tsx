@@ -1,7 +1,8 @@
 import * as THREE from 'three'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { STLLoader } from 'three-stdlib'
+import { Center } from '@react-three/drei'
 
 interface FwishModelProps {
   viewType?: 'top' | 'side' | 'front'
@@ -13,12 +14,23 @@ interface FwishModelProps {
 export function FwishModel({
   viewType = 'front',
   modelPath = '/assets/Logistic_Model_V0.stl',
+  center = false,
+  scale = 1,
   ...props
 }: FwishModelProps) {
   const group = React.useRef<THREE.Group>(null)
 
   // Load STL
   const geometry = useLoader(STLLoader, modelPath)
+
+  // Shared material to save memory
+  const material = useMemo(() => new THREE.MeshStandardMaterial({
+    color: "#ffffff",
+    metalness: 0.35,
+    roughness: 0.25,
+    emissive: "#00A3FF",
+    emissiveIntensity: 0.25,
+  }), [])
 
   // Gentle hover animation
   useFrame((state) => {
@@ -36,12 +48,21 @@ export function FwishModel({
       case 'side':
         return [0, Math.PI / 2, 0]
       case 'front':
-        // Standard high-tech 3/4 view
         return [-Math.PI / 2.5, 0, -Math.PI / 4]
       default:
         return [0, 0, 0]
     }
   }
+
+  const mesh = (
+    <mesh
+      geometry={geometry}
+      castShadow
+      receiveShadow
+      material={material}
+      scale={scale}
+    />
+  )
 
   return (
     <group
@@ -50,15 +71,7 @@ export function FwishModel({
       dispose={null}
       {...props}
     >
-      <mesh geometry={geometry} castShadow receiveShadow>
-        <meshStandardMaterial
-          color="#ffffff"
-          metalness={0.35}
-          roughness={0.25}
-          emissive="#00A3FF"
-          emissiveIntensity={0.25}
-        />
-      </mesh>
+      {center ? <Center>{mesh}</Center> : mesh}
     </group>
   )
 }
