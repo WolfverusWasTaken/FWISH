@@ -46,7 +46,7 @@ export function FwishModel({
         emissiveIntensity: 0.15,
         shininess: 60,
         specular: "#ffffff",
-        flatShading: true
+        flatShading: false
       })
     }
 
@@ -92,8 +92,8 @@ export function FwishModel({
     >
       <mesh
         geometry={geometry}
-        castShadow={isMobile}
-        receiveShadow={isMobile}
+        castShadow={!isMobile} // Disable shadows for better mobile FPS
+        receiveShadow={!isMobile}
         material={material}
       />
     </group>

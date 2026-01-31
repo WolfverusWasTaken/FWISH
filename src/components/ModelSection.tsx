@@ -65,7 +65,7 @@ const ModelSection: FC = () => {
                             <directionalLight
                                 position={[-5, 8, 4]}
                                 intensity={3}
-                                castShadow={isMobile}
+                                castShadow={!isMobile}
                             />
                             <directionalLight
                                 position={[5, 3, -4]}
