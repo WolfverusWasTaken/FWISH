@@ -21,14 +21,14 @@ const ManufacturingSection: FC = () => {
                 >
                     <div className="text-accent-green font-mono text-xs mb-4 flex items-center gap-2">
                         <span className="w-8 h-px bg-accent-green" />
-                        RAPID PROTOTYPING
+                        SUBTRACTIVE FABRICATION
                     </div>
-                    <h2 className="text-4xl font-black mb-6 uppercase">Precision <br /><span className="text-accent-blue">Manufacturing</span></h2>
+                    <h2 className="text-4xl font-black mb-6 uppercase">In-House <br /><span className="text-accent-blue">Manufacturing</span></h2>
                     <p className="text-white/60 leading-relaxed font-mono text-sm space-y-4">
-                        <span className="block">{">"} Utilizing advanced additive manufacturing techniques for wing structures.</span>
-                        <span className="block">{">"} Multi-material composites for optimal strength-to-weight ratio.</span>
-                        <span className="block">{">"} Real-time CAD/CAM calibration during core assembly.</span>
-                        <span className="block">{">"} Structural integrity verified via high-velocity stress simulation.</span>
+                        <span className="block">{">"} Proprietary in-house styrofoam CNC cutting system.</span>
+                        <span className="block">{">"} High-precision subtractive manufacturing for core airframe geometry.</span>
+                        <span className="block">{">"} Rapid wing spar and fuselage block carving from aerospace-grade foam.</span>
+                        <span className="block">{">"} Integrated structural assembly and composite skin application.</span>
                     </p>
 
                 </motion.div>
