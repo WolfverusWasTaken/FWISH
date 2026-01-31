@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>STL to GLB Converter</title>
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="status">Converting...</div>
+    <script type="module">
+        import * as THREE from 'three';
+        import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+        import { GLTFExporter } from 'three/addons/exporters/GLTFExporter.js';
+
+        async function convert(stlPath, glbName) {
+            const loader = new STLLoader();
+            const exporter = new GLTFExporter();
+            
+            try {
+                const geometry = await new Promise((resolve, reject) => {
+                    loader.load(stlPath, resolve, undefined, reject);
+                });
+                
+                const mesh = new THREE.Mesh(geometry, new THREE.MeshStandardMaterial());
+                const scene = new THREE.Scene();
+                scene.add(mesh);
+                
+                exporter.parse(scene, (result) => {
+                    const blob = new Blob([result], { type: 'application/octet-stream' });
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        console.log(`__START_GLB_${glbName}__`);
+                        console.log(reader.result.split(',')[1]);
+                        console.log(`__END_GLB_${glbName}__`);
+                        document.getElementById('status').innerText += `\nConverted ${glbName}`;
+                    };
+                    reader.readAsDataURL(blob);
+                }, { binary: true });
+            } catch (e) {
+                console.error(e);
+                document.getElementById('status').innerText += `\nError converting ${glbName}: ${e.message}`;
+            }
+        }
+
+        (async () => {
+            await convert('assets/Logistic_Model_V0.stl', 'Logistic_Model_V0');
+            await convert('assets/Model_V0.1.stl', 'Model_V0.1');
+            console.log('__CONVERSION_FINISHED__');
+        })();
+    </script>
+</body>
+</html>
