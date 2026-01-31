@@ -17,11 +17,9 @@ const ScienceSection: FC = () => {
                     </div>
                     <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">ENGINEERED FOR <br /><span className="text-accent-blue">GROUND EFFECT</span></h2>
                     <p className="text-white/60 leading-relaxed mb-8 font-light text-lg">
-                        FWISH is engineered to operate inside ground effect, where aerodynamic losses collapse and efficiency peaks.
-By flying within one chord length of the surface, a stable high-pressure air cushion forms beneath the wing—suppressing wingtip vortices, reducing induced drag, and fundamentally shifting the lift–drag balance.
-
-The result is not incremental improvement.
-It is up to 3× higher lift-to-drag efficiency than conventional free-flight aircraft, achieved through controlled proximity—not brute force.
+                        FWISH is designed as a high-speed transport that operates within the ground-effect regime to preserve aerodynamic efficiency at elevated forward speeds. By flying within approximately one chord length of the surface, a high-pressure air cushion can form beneath the wing, reducing induced drag and reshaping the lift–drag balance.
+                        <br/><br/>
+                        This regime allows higher cruise speeds to be pursued without the proportional energy penalties typical of conventional free-flight aircraft. FWISH is engineered to leverage this aerodynamic advantage through controlled proximity to the surface, rather than relying solely on increased power.
                     </p>
 
 
