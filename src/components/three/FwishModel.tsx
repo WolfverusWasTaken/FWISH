@@ -25,7 +25,7 @@ interface FwishModelProps {
 
 export function FwishModel({ viewType = 'front', center = true, ...props }: FwishModelProps) {
   const group = React.useRef<THREE.Group>(null)
-  const { nodes } = useGLTF('/assets/fwish.glb') as unknown as GLTFResult
+  const { nodes } = useGLTF('./assets/fwish.glb') as unknown as GLTFResult
 
   useFrame(() => {
     if (group.current) {
@@ -73,4 +73,4 @@ export function FwishModel({ viewType = 'front', center = true, ...props }: Fwis
   )
 }
 
-useGLTF.preload('/assets/fwish.glb')
+useGLTF.preload('./assets/fwish.glb')
