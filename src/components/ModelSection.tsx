@@ -1,4 +1,7 @@
-import { type FC } from 'react';
+import { type FC, Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { Environment, Center, PresentationControls } from '@react-three/drei';
+import { FwishModel } from './three/FwishModel';
 
 const ModelSection: FC = () => {
     return (
@@ -14,27 +17,30 @@ const ModelSection: FC = () => {
                 </h2>
             </div>
 
-            {/* Main Center View - Placeholder */}
-            <div className="w-full max-w-[900px] aspect-square relative border border-white/10 bg-black/20 rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center group">
+            {/* Main Center View */}
+            <div className="w-full max-w-[900px] aspect-square relative border border-white/10 bg-black/20 rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
                 <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
 
-                {/* Technical Grid Background */}
-                <div className="absolute inset-0 opacity-10"
-                    style={{
-                        backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
-                        backgroundSize: '40px 40px'
-                    }}
-                />
+                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 25 }}>
+                    <Suspense fallback={null}>
+                        <Environment preset="city" />
+                        <ambientLight intensity={0.5} />
+                        <pointLight position={[10, 10, 10]} intensity={3} color="#00A3FF" />
+                        <pointLight position={[-10, -10, -10]} intensity={2} color="#00A3FF" />
 
-                <div className="z-10 flex flex-col items-center gap-6">
-                    <div className="w-24 h-24 border-2 border-accent-blue rounded-full flex items-center justify-center animate-spin-slow">
-                        <div className="w-16 h-16 border border-accent-blue/30 rounded-full" />
-                    </div>
-                    <div className="text-center font-mono">
-                        <div className="text-accent-blue text-sm tracking-[0.3em] font-bold uppercase mb-2">System Initializing</div>
-                        <div className="text-white/20 text-[10px] uppercase tracking-widest animate-pulse">Establishing Secure Uplink...</div>
-                    </div>
-                </div>
+                        <PresentationControls
+                            global
+                            snap={true}
+                            rotation={[0, 0.3, 0]}
+                            polar={[-Math.PI / 3, Math.PI / 3]}
+                            azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
+                        >
+                            <Center scale={2.5}>
+                                <FwishModel viewType="front" center={true} />
+                            </Center>
+                        </PresentationControls>
+                    </Suspense>
+                </Canvas>
 
                 {/* Viewport UI Overlay */}
                 <div className="absolute top-8 left-8 font-mono text-[10px] text-accent-blue/80 uppercase tracking-[0.4em] border-l-2 border-accent-blue pl-4">
