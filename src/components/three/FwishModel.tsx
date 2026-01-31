@@ -1,64 +1,116 @@
 import * as THREE from 'three'
 import React from 'react'
 import { Center } from '@react-three/drei'
-import { useFrame, useLoader } from '@react-three/fiber'
+import { useFrame, useLoader, useThree } from '@react-three/fiber'
 import { STLLoader } from 'three-stdlib'
 
 interface FwishModelProps {
-  viewType?: 'top' | 'side' | 'front';
-  scale?: number;
-  center?: boolean;
+  viewType?: 'top' | 'side' | 'front'
+  scale?: number
+  center?: boolean
+  modelPath?: string
 }
 
-export function FwishModel({ viewType = 'front', center = true, ...props }: FwishModelProps) {
+export function FwishModel({
+  viewType = 'front',
+  center = true,
+  modelPath = '/assets/Logistic_Model_V0.stl',
+  ...props
+}: FwishModelProps) {
   const group = React.useRef<THREE.Group>(null)
 
-  // Load STL instead of GLB
-  const geometry = useLoader(STLLoader, '/assets/Logistic_Model_V0.stl')
+  // Load STL
+  const geometry = useLoader(STLLoader, modelPath)
 
+  // Gentle hover animation
   useFrame((state) => {
     if (group.current) {
-      // Gentle hovering effect without overriding rotation
       const t = state.clock.getElapsedTime()
       group.current.position.y = Math.sin(t) * 0.05
     }
   })
 
-  // Set initial orientation based on viewType only initially
+  // Initial orientation per view - Adjusted for Front-Top-Left perspective
   const getInitialRotation = (): [number, number, number] => {
     switch (viewType) {
-      case 'top': return [-Math.PI / 2, 0, 0];
-      case 'side': return [0, Math.PI / 2, 0];
-      case 'front': return [-Math.PI / 2, 0, Math.PI]; // Standard STL orientation fix
-      default: return [0, 0, 0];
+      case 'top':
+        return [-Math.PI / 2, 0, 0]
+      case 'side':
+        return [0, Math.PI / 2, 0]
+      case 'front':
+        // Rotates slightly down (pitch) and slightly to the right (yaw) 
+        // to show Front, Top, and Left surfaces
+        return [-Math.PI / 2.5, 0, -Math.PI / 4]
+      default:
+        return [0, 0, 0]
     }
   }
 
-  const model = (
-    <mesh geometry={geometry}>
-      <meshStandardMaterial
-        color="#ffffff"
-        metalness={0.8}
-        roughness={0.1}
-        emissive="#00A3FF"
-        emissiveIntensity={0.05}
-      />
-    </mesh>
-  );
+  const { viewport } = useThree()
+  const isMobile = viewport.width < 5
 
   return (
     <group
       ref={group}
       rotation={getInitialRotation()}
-      {...props}
       dispose={null}
+      {...props}
     >
+      {/* ================= LIGHTING RIG ================= */}
+
+      {/* Key light — top left (form sculptor) */}
+      <directionalLight
+        position={[-5, 6, 4]}
+        intensity={2.5}
+        castShadow
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-near={0.5}
+        shadow-camera-far={20}
+        shadow-camera-left={-5}
+        shadow-camera-right={5}
+        shadow-camera-top={5}
+        shadow-camera-bottom={-5}
+      />
+
+      {/* Fill light — soft opposite */}
+      <directionalLight position={[5, 3, -4]} intensity={0.6} />
+
+      {/* Rim light — silhouette separation */}
+      <directionalLight
+        position={[0, 4, -6]}
+        intensity={1}
+        color="#00A3FF"
+      />
+
+      {/* Ambient — restrained */}
+      <ambientLight intensity={0.25} />
+
+      {/* ================= MODEL ================= */}
+
       {center ? (
-        <Center scale={0.0003}> {/* STL files from CAD are typically in mm, scaling to m */}
-          {model}
+        <Center scale={isMobile ? 0.00015 : 0.0003}>
+          <mesh geometry={geometry} castShadow receiveShadow>
+            <meshStandardMaterial
+              color="#ffffff"
+              metalness={0.35}
+              roughness={0.25}
+              emissive="#00A3FF"
+              emissiveIntensity={0.25}
+            />
+          </mesh>
         </Center>
-      ) : model}
+      ) : (
+        <mesh geometry={geometry} castShadow receiveShadow>
+          <meshStandardMaterial
+            color="#ffffff"
+            metalness={0.35}
+            roughness={0.25}
+            emissive="#00A3FF"
+            emissiveIntensity={0.25}
+          />
+        </mesh>
+      )}
     </group>
   )
 }
-

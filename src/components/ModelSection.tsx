@@ -1,6 +1,6 @@
 import { type FC, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment, Center, PresentationControls } from '@react-three/drei';
+import { Center, PresentationControls, ContactShadows } from '@react-three/drei';
 import { FwishModel } from './three/FwishModel';
 
 const ModelSection: FC = () => {
@@ -17,39 +17,63 @@ const ModelSection: FC = () => {
                 </h2>
             </div>
 
-            {/* Main Center View */}
-            <div className="w-full max-w-[900px] aspect-square relative border border-white/10 bg-black/20 rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
-                <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
+            {/* Main Center View - Dual Viewports */}
+            <div className="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-2 gap-8 relative">
 
-                <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 25 }}>
-                    <Suspense fallback={null}>
-                        <Environment preset="city" />
-                        <ambientLight intensity={0.5} />
-                        <pointLight position={[10, 10, 10]} intensity={3} color="#00A3FF" />
-                        <pointLight position={[-10, -10, -10]} intensity={2} color="#00A3FF" />
-
-                        <PresentationControls
-                            global
-                            snap={false}
-                            rotation={[0, 0.3, 0]}
-                            polar={[-Math.PI / 3, Math.PI / 3]}
-                            azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
-                        >
-                            <Center scale={2.5}>
-                                <FwishModel viewType="front" center={true} />
-                            </Center>
-                        </PresentationControls>
-                    </Suspense>
-                </Canvas>
-
-                {/* Viewport UI Overlay */}
-                <div className="absolute top-8 left-8 font-mono text-[10px] text-accent-blue/80 uppercase tracking-[0.4em] border-l-2 border-accent-blue pl-4">
-                    SECURE VIEWPORT // 01
+                {/* Logistic Transport Model */}
+                <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
+                    <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 25 }}>
+                        <Suspense fallback={null}>
+                            <PresentationControls
+                                global
+                                snap={false}
+                                rotation={[0, 0.3, 0]}
+                                polar={[-Math.PI / 3, Math.PI / 3]}
+                                azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
+                            >
+                                <Center scale={2.5}>
+                                    <FwishModel modelPath="/assets/Logistic_Model_V0.stl" viewType="front" center={true} />
+                                </Center>
+                            </PresentationControls>
+                            <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={20} blur={2.5} far={4.5} />
+                        </Suspense>
+                    </Canvas>
+                    <div className="absolute top-6 left-6 font-mono text-[9px] text-accent-blue/80 uppercase tracking-[0.4em] border-l border-accent-blue pl-3">
+                        VARIANT_LOGISTIC // 01
+                    </div>
+                    <div className="absolute bottom-6 right-6 text-right">
+                        <div className="text-accent-blue font-mono text-[10px] mb-1 tracking-[0.3em] font-bold uppercase">Logistic Transport Model</div>
+                        <div className="text-white/20 text-[8px] font-mono leading-relaxed uppercase tracking-[0.2em]">Bulk Cargo Configuration</div>
+                    </div>
                 </div>
 
-                <div className="absolute bottom-8 right-8 text-right">
-                    <div className="text-accent-blue font-mono text-xs mb-1 tracking-[0.3em] font-bold uppercase">WIG-01 Chassis</div>
-                    <div className="text-white/20 text-[10px] font-mono leading-relaxed uppercase tracking-[0.2em]">Full aerodynamic geometric validation</div>
+                {/* Watersport Model */}
+                <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group">
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
+                    <Canvas shadows dpr={[1, 2]} camera={{ position: [0, 0, 8], fov: 25 }}>
+                        <Suspense fallback={null}>
+                            <PresentationControls
+                                global
+                                snap={false}
+                                rotation={[0, 0.3, 0]}
+                                polar={[-Math.PI / 3, Math.PI / 3]}
+                                azimuth={[-Math.PI / 1.4, Math.PI / 1.4]}
+                            >
+                                <Center scale={2.5}>
+                                    <FwishModel modelPath="/assets/Model_V0.1.stl" viewType="front" center={true} />
+                                </Center>
+                            </PresentationControls>
+                            <ContactShadows position={[0, -2.5, 0]} opacity={0.4} scale={20} blur={2.5} far={4.5} />
+                        </Suspense>
+                    </Canvas>
+                    <div className="absolute top-6 left-6 font-mono text-[9px] text-accent-blue/80 uppercase tracking-[0.4em] border-l border-accent-blue pl-3">
+                        VARIANT_WATERSPORT // 02
+                    </div>
+                    <div className="absolute bottom-6 right-6 text-right">
+                        <div className="text-accent-blue font-mono text-[10px] mb-1 tracking-[0.3em] font-bold uppercase">One Seater Watersport Model</div>
+                        <div className="text-white/20 text-[8px] font-mono leading-relaxed uppercase tracking-[0.2em]">Personal Agility Platform</div>
+                    </div>
                 </div>
             </div>
 
