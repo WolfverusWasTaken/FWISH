@@ -20,53 +20,60 @@ export function FwishModel({
   const geometry = useLoader(STLLoader, modelPath)
 
   useEffect(() => {
-    // Determine mobile once
     setIsMobile(window.innerWidth < 768)
 
-    // STL files often have face normals but not vertex normals (flat look)
-    // Computing vertex normals ensures smooth shading, which looks better 
-    // and is more efficient for the shader to process than per-face normals.
     if (geometry) {
+      // 1. Pivot Correction: Move the center of rotation to the volumetric center of the craft.
+      // This ensures that when you rotate, the model orbits around its geometric middle (wing/fuselage)
+      // rather than the tail or cockpit origin.
+      geometry.computeBoundingBox()
+      geometry.center()
       geometry.computeVertexNormals()
-      geometry.center() // Initial center
     }
   }, [geometry])
 
-  // Optimization: Switch to MeshPhongMaterial on mobile
-  // Phong is much lighter than Standard (PBR) and avoids heavy shader compilation
+  // 2. Graphic Texture Optimization: Premium Aerospace Finish
+  // Using MeshPhysicalMaterial for advanced light scattering and metallic sheen
   const material = useMemo(() => {
-    const commonProps = {
-      color: "#ffffff",
-      emissive: "#00A3FF",
-      emissiveIntensity: 0.2,
-    }
+    const baseColor = "#ffffff"
+    const accentColor = "#00A3FF"
 
     if (isMobile) {
+      // Optimized mobile shader with high-quality specular highlights
       return new THREE.MeshPhongMaterial({
-        ...commonProps,
-        shininess: 30,
-        specular: "#00A3FF"
+        color: baseColor,
+        emissive: accentColor,
+        emissiveIntensity: 0.15,
+        shininess: 60,
+        specular: "#ffffff",
+        flatShading: false
       })
     }
 
-    return new THREE.MeshStandardMaterial({
-      ...commonProps,
-      metalness: 0.4,
-      roughness: 0.3,
+    // High-end desktop shader with Clearcoat (for that polished carbon/epoxy look)
+    return new THREE.MeshPhysicalMaterial({
+      color: baseColor,
+      metalness: 0.6,
+      roughness: 0.2,
+      clearcoat: 1.0,
+      clearcoatRoughness: 0.1,
+      emissive: accentColor,
+      emissiveIntensity: 0.2,
+      reflectivity: 1.0,
+      iridescence: 0.1,
+      iridescenceIOR: 1.3,
     })
   }, [isMobile])
 
-  // Gentle hover animation
+  // Elegant hover animation
   useFrame((state) => {
     if (group.current) {
       const t = state.clock.getElapsedTime()
-      group.current.position.y = Math.sin(t) * 0.04
-      // Subtle rotation for "living" feel
-      group.current.rotation.z += Math.sin(t * 0.5) * 0.0001
+      group.current.position.y = Math.sin(t) * 0.03
     }
   })
 
-  // Initial orientation per view
+  // Initial orientation
   const getInitialRotation = (): [number, number, number] => {
     switch (viewType) {
       case 'top': return [-Math.PI / 2, 0, 0]

@@ -32,26 +32,28 @@ const ModelSection: FC = () => {
                 {/* Logistic Transport Model */}
                 <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group touch-none">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [5, 3, 12], fov: 35 }} gl={{ antialias: true }}>
+                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [6, 4, 10], fov: 35 }} gl={{ antialias: true }}>
                         <Suspense fallback={
                             <Html center>
                                 <div className="text-accent-blue/40 font-mono text-[8px] tracking-widest animate-pulse">INIT_MESH...</div>
                             </Html>
                         }>
                             <Environment preset={isMobile ? "studio" : "city"} />
-                            <ambientLight intensity={isMobile ? 0.8 : 0.5} />
+                            <ambientLight intensity={0.2} color="#00A3FF" />
+                            <ambientLight intensity={isMobile ? 0.7 : 0.4} />
                             <directionalLight
                                 position={[-5, 8, 4]}
-                                intensity={3}
+                                intensity={2.5}
                                 castShadow={!isMobile}
                             />
-                            <directionalLight position={[5, 3, -4]} intensity={1} />
+                            <directionalLight position={[5, 3, -4]} intensity={0.8} color="#00A3FF" />
 
                             <OrbitControls
                                 enableZoom={true}
                                 enablePan={false}
-                                minDistance={5}
-                                maxDistance={20}
+                                minDistance={2}
+                                maxDistance={15}
+                                target={[0, 0, 0]}
                                 makeDefault
                                 autoRotate={false}
                                 enableDamping={true}
@@ -59,7 +61,7 @@ const ModelSection: FC = () => {
                                 zoomSpeed={1.2}
                             />
 
-                            <Center scale={isMobile ? 0.0008 : 0.0005}>
+                            <Center top scale={isMobile ? 0.0008 : 0.0006}>
                                 <FwishModel modelPath="assets/Logistic_Model_V0.stl" viewType="front" />
                             </Center>
 
@@ -84,34 +86,36 @@ const ModelSection: FC = () => {
                 {/* Watersport Model */}
                 <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl transition-all hover:bg-black/30 hover:border-accent-blue/20 group touch-none">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
-                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [5, 3, 12], fov: 35 }} gl={{ antialias: true }}>
+                    <Canvas shadows dpr={isMobile ? 1 : [1, 2]} camera={{ position: [6, 4, 10], fov: 35 }} gl={{ antialias: true }}>
                         <Suspense fallback={
                             <Html center>
                                 <div className="text-accent-blue/40 font-mono text-[8px] tracking-widest animate-pulse">INIT_MESH...</div>
                             </Html>
                         }>
                             <Environment preset={isMobile ? "studio" : "city"} />
-                            <ambientLight intensity={isMobile ? 0.8 : 0.5} />
+                            <ambientLight intensity={0.2} color="#00A3FF" />
+                            <ambientLight intensity={isMobile ? 0.7 : 0.4} />
                             <directionalLight
                                 position={[-5, 8, 4]}
-                                intensity={3}
+                                intensity={2.5}
                                 castShadow={!isMobile}
                             />
-                            <directionalLight position={[5, 3, -4]} intensity={1} />
+                            <directionalLight position={[5, 3, -4]} intensity={0.8} color="#00A3FF" />
 
                             <OrbitControls
                                 enableZoom={true}
                                 enablePan={false}
-                                minDistance={5}
-                                maxDistance={20}
+                                minDistance={2}
+                                maxDistance={15}
+                                target={[0, 0, 0]}
                                 makeDefault
                                 autoRotate={false}
                                 enableDamping={true}
-                                rotateSpeed={0.8}
+                                rotateSpeed={0.6}
                                 zoomSpeed={1.2}
                             />
 
-                            <Center scale={isMobile ? 0.0008 : 0.0005}>
+                            <Center top scale={isMobile ? 0.0008 : 0.0006}>
                                 <FwishModel modelPath="assets/Model_V0.1.stl" viewType="front" />
                             </Center>
 
