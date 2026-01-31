@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useScroll, useTransform, motion, useSpring } from 'framer-motion';
+import { useScroll, useTransform, useSpring } from 'framer-motion';
 import Cockpit from './components/Cockpit';
 import HeroSection from './components/HeroSection';
 import ModelSection from './components/ModelSection';
