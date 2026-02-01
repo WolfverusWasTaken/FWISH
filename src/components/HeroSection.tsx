@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const FLOAT_ANIMATION = {
     animate: { y: [0, -4, 0] },
-    transition: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+    transition: { duration: 10, repeat: Infinity, ease: "easeInOut" as const },
 };
 
 const HeroSection: FC = () => {
