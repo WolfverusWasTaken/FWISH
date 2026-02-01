@@ -1,6 +1,9 @@
 import type { FC } from 'react';
 import { motion } from 'framer-motion';
 
+import imgLogo from '../assets/Logo_nobackground.png';
+import imgIcon from '../assets/icon_nobackground.png';
+
 const HeroSection: FC = () => {
     return (
         <section
@@ -18,7 +21,7 @@ const HeroSection: FC = () => {
                 <div className="mb-6 flex items-center gap-6">
                     {/* LEFT LOGO */}
                     <img
-                        src="/Logo_nobackground.png"
+                        src={imgLogo}
                         alt="Founding Bureau Logo"
                         className="
                             w-24 h-24 md:w-32 md:h-32
@@ -32,7 +35,7 @@ const HeroSection: FC = () => {
 
                     {/* FWISH LOGO (NO CIRCLE) */}
                     <img
-                        src="/favicon_nobackground.png"
+                        src={imgIcon}
                         alt="FWISH Engineering Logo"
                         className="
                             w-24 h-24 md:w-32 md:h-32

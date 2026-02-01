@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+import logo from '../assets/Logo_nobackground.png';
 
 interface HeaderProps {
     currentView: 'project' | 'science' | 'products' | 'contact';
@@ -26,7 +27,7 @@ const Header: FC<HeaderProps> = ({ currentView, onViewChange }) => {
                     className="flex items-center gap-3 md:gap-4 group"
                 >
                     <img
-                        src="/Logo_nobackground.png"
+                        src={logo}
                         alt="FWISH Logo"
                         className="
                             w-10 h-10
@@ -56,8 +57,8 @@ const Header: FC<HeaderProps> = ({ currentView, onViewChange }) => {
                             key={view}
                             onClick={() => view === 'project' ? handleProjectClick() : onViewChange(view)}
                             className={`font-mono text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.3em] transition-all px-1 ${currentView === view
-                                    ? 'text-accent-blue'
-                                    : 'text-white/40 hover:text-white'
+                                ? 'text-accent-blue'
+                                : 'text-white/40 hover:text-white'
                                 }`}
                         >
                             {view}
