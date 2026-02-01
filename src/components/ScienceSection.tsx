@@ -3,32 +3,25 @@ import { motion } from 'framer-motion';
 
 const ScienceSection: FC = () => {
     return (
-        <section id="science" className="w-full py-20 flex flex-col items-center justify-center relative px-8">
-            <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                <motion.div
-                    initial={{ opacity: 0, x: -50 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: false, margin: "-100px" }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <div className="text-accent-blue font-mono text-xs mb-4 flex items-center gap-2">
-                        <span className="w-8 h-px bg-accent-blue" />
-                        AERODYNAMIC DOMAIN STUDY
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">THE GROUND EFFECT <br /><span className="text-accent-blue">REGIME</span></h2>
-                    <p className="text-white/60 leading-relaxed mb-8 font-light text-lg">
-                        There is a forgotten boundary between the open ocean and the sky.
-                        WIG (Wing-In-Ground) craft operate in this interface, compressing air against the surface to generate high-efficiency lift.
-                        <br /><br />
-                        We are not inventing new physics; we are engineering hardware to stabilize this chaotic regime.
-                        Our focus is the "cushion"—the high-pressure volume that allows transport efficiency 3x greater than free-flight aircraft.
-                    </p>
+        <section
+            id="science"
+            className="w-full py-20 flex flex-col items-center justify-center relative px-8"
+        >
+            <div className="max-w-6xl w-full flex flex-col gap-12">
 
+                {/* SECTION LABEL */}
+                <div className="text-accent-blue font-mono text-xs flex items-center gap-2 justify-center lg:justify-start">
+                    <span className="w-8 h-px bg-accent-blue" />
+                    AERODYNAMIC DOMAIN STUDY
+                </div>
 
-                </motion.div>
+                {/* TITLE */}
+                <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tight text-center lg:text-left">
+                    The Ground Effect <span className="text-accent-blue">Regime</span>
+                </h2>
 
-                <div className="relative h-[280px] md:h-[350px] glass rounded-3xl overflow-hidden border border-white/5 flex flex-col items-center justify-center">
-                    {/* SVG Airflow Animation */}
+                {/* ANIMATION BLOCK */}
+                <div className="relative h-[280px] md:h-[350px] glass rounded-3xl overflow-hidden border border-white/5 flex items-center justify-center">
                     <svg width="100%" height="100%" viewBox="-20 40 440 260" className="opacity-80">
                         {/* Wing Profile */}
                         <g transform="rotate(5 200 160)">
@@ -39,106 +32,62 @@ const ScienceSection: FC = () => {
                                 strokeWidth="2"
                             />
                         </g>
-                        <defs>
-                            <pattern id="groundPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
-                                <line x1="0" y1="40" x2="40" y2="0" stroke="white" strokeWidth="0.5" strokeOpacity="0.05" />
-                            </pattern>
-                            <linearGradient id="groundGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                <stop offset="0%" stopColor="var(--color-accent-blue)" stopOpacity="0.3" />
-                                <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-                            </linearGradient>
-                            <radialGradient id="pressureGradient" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stopColor="var(--color-accent-blue)" />
-                                <stop offset="100%" stopColor="transparent" />
-                            </radialGradient>
-                            <filter id="glow">
-                                <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-                                <feMerge>
-                                    <feMergeNode in="coloredBlur" />
-                                    <feMergeNode in="SourceGraphic" />
-                                </feMerge>
-                            </filter>
-                        </defs>
 
-                        {/* Ground Surface */}
-                        <motion.rect
-                            x="-100" y="270" width="600" height="30"
-                            fill="url(#groundGradient)"
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
+                        {/* Ground */}
+                        <line
+                            x1="-100"
+                            y1="270"
+                            x2="500"
+                            y2="270"
+                            stroke="var(--color-accent-blue)"
+                            strokeWidth="2"
+                            strokeOpacity="0.4"
                         />
-                        <rect x="0" y="270" width="400" height="30" fill="url(#groundPattern)" />
-                        <line x1="0" y1="270" x2="400" y2="270" stroke="var(--color-accent-blue)" strokeWidth="2" strokeOpacity="0.5" filter="url(#glow)" />
 
-                        {/* Top Airflow Lines (Thinner, Following Wing Contour) */}
-                        {[0, 1, 2, 3].map((i) => (
+                        {/* Bottom compressed flow */}
+                        {[0, 1, 2, 3, 4].map((i) => (
                             <motion.path
-                                key={`top-${i}`}
-                                d={`M -50 ${120 - i * 20} Q 150 ${40 - i * 20} 450 ${120 - i * 20}`}
+                                key={i}
+                                d={`M -50 ${185 + i * 12} Q 180 ${210 + i * 10} 450 ${185 + i * 12}`}
                                 fill="none"
                                 stroke="var(--color-accent-blue)"
-                                strokeWidth="0.5"
-                                strokeDasharray="4,8"
-                                initial={{ strokeDashoffset: 100 }}
-                                animate={{ strokeDashoffset: 0 }}
-                                transition={{ duration: 0.8, repeat: Infinity, ease: "linear", delay: i * 0.2 }}
-                                style={{ opacity: 0.1 }}
+                                strokeWidth={1.4 - i * 0.15}
+                                strokeDasharray="8,12"
+                                animate={{ strokeDashoffset: [100, 0] }}
+                                transition={{
+                                    duration: 1.4,
+                                    repeat: Infinity,
+                                    ease: "linear",
+                                    delay: i * 0.1,
+                                }}
+                                style={{ opacity: 0.25 }}
                             />
                         ))}
-
-                        {/* Specific Top-Surface Hugging Line */}
-                        <motion.path
-                            d="M -50 145 Q 150 70 450 155"
-                            fill="none"
-                            stroke="var(--color-accent-blue)"
-                            strokeWidth="1.2"
-                            strokeDasharray="6 6"
-                            filter="url(#glow)"
-                            initial={{ strokeDashoffset: 100 }}
-                            animate={{ strokeDashoffset: 0 }}
-                            transition={{ duration: 0.5, repeat: Infinity, ease: "linear" }}
-                            style={{ opacity: 0.2 }}
-                        />
-
-                        {/* Bottom Airflow Lines (Dense, Compressed) */}
-                        {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => {
-                            const baseY = 185 + i * 10;
-                            const curveY = 200 + i * 8;
-                            return (
-                                <motion.path
-                                    key={`bottom-${i}`}
-                                    d={`M -50 ${baseY} Q 180 ${curveY} 450 ${baseY}`}
-                                    fill="none"
-                                    stroke="var(--color-accent-blue)"
-                                    strokeWidth={1.5 - (i * 0.1)}
-                                    strokeDasharray="8,12"
-                                    initial={{ strokeDashoffset: 100 }}
-                                    animate={{ strokeDashoffset: 0 }}
-                                    transition={{ duration: 1.2 - (i * 0.05), repeat: Infinity, ease: "linear", delay: i * 0.1 }}
-                                    style={{ opacity: 0.3 - (i * 0.02) }}
-                                />
-                            );
-                        })}
-
-                        {/* High Pressure Cushion Visual */}
-                        <motion.rect
-                            x="50" y="175" width="300" height="95"
-                            fill="url(#pressureGradient)"
-                            animate={{
-                                opacity: [0.05, 0.15, 0.05],
-                                scaleY: [1, 1.05, 1],
-                            }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                            style={{ transformOrigin: 'top' }}
-                        />
                     </svg>
 
-                    <div className="absolute top-4 right-4 flex flex-col gap-2">
-                        <div className="flex items-center gap-2 text-[8px] text-accent-blue bg-accent-blue/10 px-2 py-1 rounded-full uppercase font-mono animate-pulse">
-                            ALTITUDE LOCKED
-                        </div>
+                    <div className="absolute top-4 right-4 text-[8px] text-accent-blue bg-accent-blue/10 px-3 py-1 rounded-full uppercase font-mono">
+                        Ground Proximity Regime
                     </div>
                 </div>
+
+                {/* TEXT BELOW ANIMATION */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="max-w-3xl mx-auto text-center lg:text-left"
+                >
+                    <p className="text-white/60 leading-relaxed font-light text-base md:text-lg">
+                        There is a neglected aerodynamic regime at the boundary between the open ocean and the sky.
+                        Wing-In-Ground (WIG) flight emerges when lifting surfaces operate in close proximity to a surface,
+                        altering pressure distribution and lift behavior in ways that do not fit neatly into conventional
+                        aerospace or maritime models.
+                        <br /><br />
+                        Despite its potential, this regime has remained underexplored — not because the physics are unknown,
+                        but because it exists between institutional boundaries. Project FWISH exists to reframe ground-effect
+                        flight as a legitimate engineering domain worthy of attention, experimentation, and serious systems thinking.
+                    </p>
+                </motion.div>
             </div>
         </section>
     );

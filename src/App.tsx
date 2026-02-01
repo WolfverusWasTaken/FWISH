@@ -80,11 +80,11 @@ function App() {
       ) : (
         <main className="relative z-10 min-h-[180vh]">
           <HeroSection />
-          <ManufacturingSection />
+          <ManufacturingSection onContactClick={() => setView('contact')} />
 
           <footer className="py-20 flex flex-col items-center border-t border-white/5 opacity-50 scroll-snap-align-start snap-start">
             <div className="text-[10px] font-mono mb-2 uppercase tracking-[1em]">FWISH AEROSPACE</div>
-            <div className="text-[8px] text-white/20">© 2026 FWISH AEROSPACE TECHNOLOGIES — GLOBAL TRANSPORT INFRASTRUCTURE.</div>
+            <div className="text-[8px] text-white/20">© 2025 FWISH AEROSPACE TECHNOLOGIES — GLOBAL TRANSPORT INFRASTRUCTURE.</div>
           </footer>
         </main>
       )}

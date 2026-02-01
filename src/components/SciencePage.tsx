@@ -6,8 +6,8 @@ const SciencePage: FC = () => {
     return (
         <div className="bg-black min-h-screen flex flex-col justify-between">
             <main className="pt-20 md:pt-24 flex-grow flex flex-col">
-                <PressureSection />
                 <ScienceSection />
+                <PressureSection />
             </main>
 
             {/* Science Footer */}

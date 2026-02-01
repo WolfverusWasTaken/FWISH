@@ -19,8 +19,9 @@ const PressureSection: FC = () => {
                     </div>
                     <h2 className="text-4xl md:text-6xl font-black mb-8 uppercase tracking-tighter text-white">The Uncharted <span className="text-accent-blue">Gap</span></h2>
                     <div className="text-white/60 leading-relaxed font-mono text-sm md:text-base space-y-6 max-w-2xl mx-auto">
-                        <p className="block">The zone between flight and sailing is historically littered with failures. We are building the open-source flight data required to tame it.</p>
-                        <p className="block">This is not just about one vehicle; it's about unlocking a new mode of transit. High-risk, high-reward engineering for the post-carbon era.</p>
+                        <p className="block">The boundary between flight and sailing has long existed outside mainstream aerospace and maritime development.</p>
+                        <p className="block">Project FWISH exists to re-center engineering attention on this neglected domain — not as a product effort, but as a systems-level exploration of what becomes possible when ground-effect flight is treated as a first-class discipline.</p>
+                        <p className="block">Our aim is to inspire engineers, researchers, and builders to engage with this regime — to think, prototype, and experiment where conventional categories break down.</p>
                     </div>
                 </motion.div>
             </div>

@@ -47,7 +47,7 @@ const HeroSection: FC = () => {
 
                 {/* Identity Line */}
                 <h1 className="text-[8px] md:text-xs font-mono text-accent-blue/80 tracking-[0.3em] md:tracking-[0.45em] uppercase mb-3 px-2">
-                    Advanced Aerospace Technologies · Est. 2026
+                    Est. 2025
                 </h1>
 
                 {/* Title */}
@@ -57,12 +57,12 @@ const HeroSection: FC = () => {
 
                 {/* Mission Line */}
                 <h3 className="mt-3 text-sm md:text-xl font-medium text-white/80 tracking-tight px-4 max-w-xs md:max-w-none">
-                    Next-Generation Ground-Effect Solutions
+                    Making Ground-Effect Transport Operable, Stable, and Scalable
                 </h3>
 
                 {/* Classification */}
-                <p className="mt-4 text-accent-blue font-mono text-[11px] md:text-xs tracking-wide">
-                    Division: High-Speed Marine Transport
+                <p className="mt-5 text-accent-blue font-mono text-[8px] md:text-xxs tracking-wide">
+                    High-Speed Marine Transport
                 </p>
 
                 {/* Scroll Action */}
@@ -72,10 +72,10 @@ const HeroSection: FC = () => {
                             .getElementById('manufacturing')
                             ?.scrollIntoView({ behavior: 'smooth' })
                     }
-                    className="mt-16 md:mt-20 px-8 py-3 relative group overflow-hidden border border-white/5 hover:border-accent-blue/30 transition-all duration-700"
+                    className="mt-16 md:mt-20 px-8 py-3 relative group overflow-hidden border border-white/10 hover:border-accent-blue/30 transition-all duration-700"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5, duration: 0.25 }}
+                    transition={{ delay: 0.25, duration: 0.25 }}
                 >
                     <div className="absolute inset-0 bg-accent-blue/0 group-hover:bg-accent-blue/[0.02] transition-colors" />
 
@@ -86,8 +86,8 @@ const HeroSection: FC = () => {
                         transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
                     />
 
-                    <span className="relative z-10 text-white/30 group-hover:text-white font-mono text-[9px] md:text-[10px] tracking-[0.5em] uppercase transition-colors">
-                        Explore Systems <span className="inline-block group-hover:translate-y-0.5 transition-transform">↓</span>
+                    <span className="relative z-10 text-white/55 group-hover:text-white font-mono text-[9px] md:text-[10px] tracking-[0.5em] uppercase transition-colors">
+                        Explore the Engineering <span className="inline-block group-hover:translate-y-0.5 transition-transform"></span>
                     </span>
                 </motion.button>
             </motion.div>

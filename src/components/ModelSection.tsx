@@ -20,7 +20,7 @@ const ModelSection: FC = () => {
                         Systems Engineering Review // PROTOTYPES
                     </div>
                 </div>
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase italic tracking-tighter leading-none text-white">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-mono uppercase tracking-tighter leading-none text-white">
                     Ground-Effect <span className="text-accent-blue">Probes</span>
                 </h2>
             </div>
