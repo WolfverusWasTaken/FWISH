@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useScroll, useTransform, useSpring } from 'framer-motion';
-import Cockpit from './components/Cockpit';
 import HeroSection from './components/HeroSection';
-import ModelSection from './components/ModelSection';
-import ScienceSection from './components/ScienceSection';
 import ContactSection from './components/ContactSection';
 import ManufacturingSection from './components/ManufacturingSection';
-import PressureSection from './components/PressureSection';
+import Cockpit from './components/Cockpit';
+import SciencePage from './components/SciencePage';
+import ProductsPage from './components/ProductsPage';
+import Header from './components/Header';
 
 function App() {
+  const [view, setView] = useState<'project' | 'science' | 'products'>('project');
   const { scrollYProgress } = useScroll();
 
   // Smooth out the scroll values
@@ -30,41 +31,44 @@ function App() {
   const [efficiency, setEfficiency] = useState(8);
   const efficiencyValue = useTransform(smoothProgress, [0, 0.45, 0.5, 0.7, 0.75, 1], [8, 12, 24.5, 22.1, 15, 12]);
 
-  // Sync state with motion values for the non-motion components if needed
-  // But Cockpit can actually take motion values if we wrap it, but for simplicity:
+  // Sync state with motion values
   useEffect(() => {
-    return speedValue.on("change", (latest) => setSpeed(latest));
-  }, [speedValue]);
-
-  useEffect(() => {
-    return altitudeValue.on("change", (latest) => setAltitude(latest));
-  }, [altitudeValue]);
-
-  useEffect(() => {
-    return efficiencyValue.on("change", (latest) => setEfficiency(latest));
-  }, [efficiencyValue]);
+    const unsubSpeed = speedValue.on("change", (latest: number) => setSpeed(latest));
+    const unsubAlt = altitudeValue.on("change", (latest: number) => setAltitude(latest));
+    const unsubEff = efficiencyValue.on("change", (latest: number) => setEfficiency(latest));
+    return () => {
+      unsubSpeed();
+      unsubAlt();
+      unsubEff();
+    };
+  }, [speedValue, altitudeValue, efficiencyValue]);
 
   return (
-    <div className="bg-black text-white selection:bg-accent-blue selection:text-black min-h-[300vh]">
+    <div className="bg-black text-white selection:bg-accent-blue selection:text-black">
+      <Header currentView={view} onViewChange={setView} />
+
       <Cockpit
         speed={speed}
         altitude={altitude}
         efficiency={efficiency}
       />
 
-      <main className="relative z-10">
-        <HeroSection />
-        <ManufacturingSection />
-        <PressureSection />
-        <ScienceSection />
-        <ModelSection />
-        <ContactSection /> {/* Replaced SimulationSection with ContactSection */}
+      {view === 'science' ? (
+        <SciencePage />
+      ) : view === 'products' ? (
+        <ProductsPage />
+      ) : (
+        <main className="relative z-10 min-h-[300vh]">
+          <HeroSection />
+          <ManufacturingSection />
+          <ContactSection />
 
-        <footer className="py-20 flex flex-col items-center border-t border-white/5 opacity-50 scroll-snap-align-start snap-start">
-          <div className="text-[10px] font-mono mb-2 uppercase tracking-[1em]">FWISH AEROSPACE</div>
-          <div className="text-[8px] text-white/20">© 2026 FWISH AEROSPACE TECHNOLOGIES — GLOBAL TRANSPORT INFRASTRUCTURE.</div>
-        </footer>
-      </main>
+          <footer className="py-20 flex flex-col items-center border-t border-white/5 opacity-50 scroll-snap-align-start snap-start">
+            <div className="text-[10px] font-mono mb-2 uppercase tracking-[1em]">FWISH AEROSPACE</div>
+            <div className="text-[8px] text-white/20">© 2026 FWISH AEROSPACE TECHNOLOGIES — GLOBAL TRANSPORT INFRASTRUCTURE.</div>
+          </footer>
+        </main>
+      )}
 
       {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">

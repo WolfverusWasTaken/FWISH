@@ -1,6 +1,5 @@
 
 import { type FC } from 'react';
-import { ChevronUp, ChevronDown } from 'lucide-react';
 
 interface TelemetryProps {
     speed: number;
@@ -8,54 +7,35 @@ interface TelemetryProps {
     efficiency: number;
 }
 
-const sections = ['pre-flight', 'manufacturing', 'pressure-viz', 'science', 'prototype-3d', 'simulation'];
-
-const Cockpit: FC<TelemetryProps> = () => {
-    const scrollToSection = (direction: 'up' | 'down') => {
-        const sectionElements = sections.map(id => document.getElementById(id));
-
-        // Find the current section
-        const currentIdx = sectionElements.findIndex(el => {
-            if (!el) return false;
-            const rect = el.getBoundingClientRect();
-            return rect.top >= -100 && rect.top <= 100;
-        });
-
-        let targetIdx = currentIdx;
-        if (direction === 'down') {
-            targetIdx = Math.min(currentIdx + 1, sections.length - 1);
-            // If none currently centered, find the next one below the viewport
-            if (currentIdx === -1) {
-                targetIdx = sectionElements.findIndex(el => el && el.getBoundingClientRect().top > 100);
-            }
-        } else {
-            targetIdx = Math.max(currentIdx - 1, 0);
-            // If none currently centered, find the first one above the viewport
-            if (currentIdx === -1) {
-                const reversedIdx = [...sectionElements].reverse().findIndex(el => el && el.getBoundingClientRect().top < -100);
-                targetIdx = reversedIdx !== -1 ? (sections.length - 1 - reversedIdx) : 0;
-            }
-        }
-
-        if (targetIdx !== -1 && sectionElements[targetIdx]) {
-            sectionElements[targetIdx]?.scrollIntoView({ behavior: 'smooth' });
-        }
-    };
-
+const Cockpit: FC<TelemetryProps> = ({ speed, altitude, efficiency }) => {
     return (
-        <div className="fixed inset-y-0 right-8 z-[100] flex flex-col justify-center gap-4 pointer-events-none">
-            <button
-                onClick={() => scrollToSection('up')}
-                className="glass p-4 rounded-full border border-white/10 hover:border-accent-blue hover:text-accent-blue transition-all pointer-events-auto group"
-            >
-                <ChevronUp className="w-6 h-6 group-hover:-translate-y-1 transition-transform" />
-            </button>
-            <button
-                onClick={() => scrollToSection('down')}
-                className="glass p-4 rounded-full border border-white/10 hover:border-accent-blue hover:text-accent-blue transition-all pointer-events-auto group"
-            >
-                <ChevronDown className="w-6 h-6 group-hover:translate-y-1 transition-transform" />
-            </button>
+        <div className="fixed bottom-10 left-10 z-[100] flex flex-col gap-6 pointer-events-none font-mono">
+            {/* Speed Telemetry */}
+            <div className="space-y-1">
+                <div className="text-[9px] text-white/30 uppercase tracking-[0.2em]">Velocity</div>
+                <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-black text-white leading-none">{Math.round(speed)}</span>
+                    <span className="text-[10px] text-accent-blue uppercase font-bold tracking-widest">KPH</span>
+                </div>
+            </div>
+
+            {/* Altitude Telemetry */}
+            <div className="space-y-1">
+                <div className="text-[9px] text-white/30 uppercase tracking-[0.2em]">Altitude</div>
+                <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-black text-white leading-none">{altitude.toFixed(1)}</span>
+                    <span className="text-[10px] text-accent-blue uppercase font-bold tracking-widest">M</span>
+                </div>
+            </div>
+
+            {/* Efficiency Telemetry */}
+            <div className="space-y-1">
+                <div className="text-[9px] text-white/30 uppercase tracking-[0.2em]">Efficiency</div>
+                <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-black text-white leading-none">{efficiency.toFixed(1)}</span>
+                    <span className="text-[10px] text-accent-blue uppercase font-bold tracking-widest">L/D</span>
+                </div>
+            </div>
         </div>
     );
 };
