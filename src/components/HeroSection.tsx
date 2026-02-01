@@ -1,11 +1,6 @@
 import type { FC } from 'react';
 import { motion } from 'framer-motion';
 
-const FLOAT_ANIMATION = {
-    animate: { y: [0, -4, 0] },
-    transition: { duration: 10, repeat: Infinity, ease: "easeInOut" as const },
-};
-
 const HeroSection: FC = () => {
     return (
         <section
@@ -37,7 +32,7 @@ const HeroSection: FC = () => {
 
                     {/* FWISH LOGO (NO CIRCLE) */}
                     <img
-                        src="./favicon_nobackground.png"
+                        src="/favicon_nobackground.png"
                         alt="FWISH Engineering Logo"
                         className="
                             w-24 h-24 md:w-32 md:h-32
