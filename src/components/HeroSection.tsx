@@ -10,38 +10,38 @@ const HeroSection: FC = () => {
     return (
         <section
             id="pre-flight"
-            className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-40 pb-56"
+            className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden pt-32 pb-48 md:pt-40 md:pb-56 px-4"
         >
             {/* Foreground Content — STATIC REFERENCE */}
             <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 1.2, ease: "easeOut" }}
-                className="z-10 flex flex-col items-center text-center px-4"
+                className="z-10 flex flex-col items-center text-center w-full max-w-lg md:max-w-none"
             >
                 {/* Emblem */}
                 <div className="mb-6 relative">
                     <img
                         src="./favicon.jpg"
                         alt="FWISH Engineering Emblem"
-                        className="w-28 h-28 md:w-36 md:h-36 object-cover rounded-full border border-white/10 grayscale"
+                        className="w-24 h-24 md:w-36 md:h-36 object-cover rounded-full border border-white/10 grayscale"
                     />
                     <div className="absolute inset-0 rounded-full border border-accent-blue/20" />
                 </div>
 
                 {/* Identity Line */}
-                <h1 className="text-[9px] md:text-xs font-mono text-accent-blue/80 tracking-[0.45em] uppercase mb-3">
+                <h1 className="text-[8px] md:text-xs font-mono text-accent-blue/80 tracking-[0.3em] md:tracking-[0.45em] uppercase mb-3 px-2">
                     Advanced Aerospace Technologies · Est. 2026
                 </h1>
 
                 {/* Title */}
-                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tight leading-none">
+                <h2 className="text-3xl md:text-7xl font-black text-white tracking-tight leading-none uppercase">
                     PROJECT <span className="stroke-text-transparent">FWISH</span>
                 </h2>
 
                 {/* Mission Line — CLEAN */}
-                <h3 className="mt-3 text-base md:text-xl font-medium text-white/80 tracking-tight">
-                    High-Speed Ground-Effect Transport
+                <h3 className="mt-3 text-sm md:text-xl font-medium text-white/80 tracking-tight px-4 max-w-xs md:max-w-none">
+                    Next-Generation Ground-Effect Solutions
                 </h3>
 
                 {/* Classification — Technical Metadata */}

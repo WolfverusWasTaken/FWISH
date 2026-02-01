@@ -14,7 +14,7 @@ const ManufacturingSection: FC = () => {
     }, []);
 
     return (
-        <section id="manufacturing" className="min-h-screen py-32 flex flex-col items-center justify-center relative px-8 bg-black overflow-hidden">
+        <section id="manufacturing" className="py-20 md:py-32 flex flex-col items-center justify-center relative px-6 md:px-8 bg-black overflow-hidden">
             {/* Background Narrative Image */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <motion.div
@@ -29,37 +29,36 @@ const ManufacturingSection: FC = () => {
                         className="
                             w-full h-full
                             object-cover
-                            object-[15%_75%] md:object-[35%_75%]
-                            grayscale opacity-60
+                            object-[45%_75%] md:object-[35%_75%]
+                            grayscale opacity-40 md:opacity-60
                             "
                     />
 
                     {/* Gradient Blending Masks - Softened */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/40 to-black/20 md:via-black/20 md:to-transparent" />
                     <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
                 </motion.div>
             </div>
 
-            <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
+            <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center relative z-10">
                 {/* Left Side: Technical Text */}
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
+                    className="text-center md:text-left"
                 >
-                    <div className="text-accent-blue font-mono text-[10px] md:text-xs mb-3 md:mb-4 flex items-center gap-2">
+                    <div className="text-accent-blue font-mono text-[9px] md:text-xs mb-3 md:mb-4 flex items-center justify-center md:justify-start gap-2">
                         <span className="w-6 md:w-8 h-px bg-accent-blue" />
-                        WHAT FWISH IS
+                        SYSTEMS ARCHITECTURE
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-black mb-4 md:mb-6 uppercase">Systems <br /><span className="text-accent-blue">Engineering</span></h2>
-                    <p className="text-white/60 leading-relaxed font-mono text-xs md:text-sm space-y-3 md:space-y-4">
-                        <span className="block italic mb-3 md:mb-4">"A design-led exploration of the ground-effect regime."</span>
-                        <span className="block">{">"} FWISH is not a product. It is a systems engineering campaign.</span>
-                        <span className="block">{">"} We verify aerodynamics through rapid, hardware-rich iteration.</span>
-                        <span className="block">{">"} Our goal is to generate open verifyable data for low-altitude transport.</span>
-                        <span className="block">{">"} We cut, laminate, and fly to validate the physics.</span>
+                    <h2 className="text-2xl md:text-4xl font-black mb-4 md:mb-6 uppercase tracking-tight">Systems <br className="hidden md:block" /><span className="text-accent-blue">Engineering</span></h2>
+                    <p className="text-white/60 leading-relaxed font-mono text-[10px] md:text-sm space-y-2 md:space-y-4 max-w-sm mx-auto md:mx-0">
+                        <span className="block italic mb-2 md:mb-4">"A design-led exploration of ground-effect."</span>
+                        <span className="block">{">"} FWISH is a specialized engineering campaign.</span>
+                        <span className="block">{">"} Verifying aerodynamics via rapid hardware iteration.</span>
+                        <span className="block">{">"} Generating verifiable data for low-altitude transit.</span>
                     </p>
-
                 </motion.div>
 
                 {/* Right Side: Visual Evidence */}
