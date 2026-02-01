@@ -11,8 +11,27 @@ const ManufacturingSection: FC = () => {
     }, []);
 
     return (
-        <section id="manufacturing" className="min-h-screen py-32 flex flex-col items-center justify-center relative px-8 bg-black">
-            <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+        <section id="manufacturing" className="min-h-screen py-32 flex flex-col items-center justify-center relative px-8 bg-black overflow-hidden">
+            {/* Background Narrative Image */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <motion.div
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    whileInView={{ opacity: 0.7, scale: 1}}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    className="w-full h-full"
+                >
+                    <img
+                        src="/assets/Model_V0_building.jpg"
+                        alt=""
+                        className="w-full h-full object-cover object-center grayscale opacity-60"
+                    />
+                    {/* Gradient Blending Masks - Softened */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-black via-black/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+                </motion.div>
+            </div>
+
+            <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
                 {/* Left Side: Technical Text */}
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
@@ -21,35 +40,38 @@ const ManufacturingSection: FC = () => {
                 >
                     <div className="text-accent-blue font-mono text-xs mb-4 flex items-center gap-2">
                         <span className="w-8 h-px bg-accent-blue" />
-                        SUBTRACTIVE FABRICATION
+                        PROCESS VALIDATION
                     </div>
-                    <h2 className="text-4xl font-black mb-6 uppercase">In-House <br /><span className="text-accent-blue">Manufacturing</span></h2>
+                    <h2 className="text-4xl font-black mb-6 uppercase">Hardware-First <br /><span className="text-accent-blue">Loop</span></h2>
                     <p className="text-white/60 leading-relaxed font-mono text-sm space-y-4">
-                        <span className="block">{">"} Proprietary in-house styrofoam CNC cutting system.</span>
-                        <span className="block">{">"} High-precision subtractive manufacturing for core airframe geometry.</span>
-                        <span className="block">{">"} Rapid wing spar and fuselage block carving from aerospace-grade foam.</span>
-                        <span className="block">{">"} Integrated structural assembly and composite skin application.</span>
+                        <span className="block">{">"} We don't just simulate. We cut, laminate, and fly.</span>
+                        <span className="block">{">"} In-house rapid prototyping pipeline for immediate flight data.</span>
+                        <span className="block">{">"} Validating the low-altitude regime requires physical risk-taking.</span>
+                        <span className="block">{">"} Building a culture of "Serious Play" in heavy engineering.</span>
                     </p>
 
                 </motion.div>
 
-                {/* Right Side: Portrait Video */}
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 1 }}
-                    className="relative aspect-[9/16] max-h-[700px] w-full max-w-[400px] mx-auto rounded-3xl overflow-hidden glass border border-white/10 shadow-[0_0_50px_rgba(0,163,255,0.1)]"
-                >
-                    <video
-                        ref={videoRef}
-                        src="./manufacturing.MOV"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        className="w-full h-full object-cover opacity-80"
-                    />
-                </motion.div>
+                {/* Right Side: Visual Evidence */}
+                <div className="flex flex-col items-center">
+                    {/* Manufacturing Video */}
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1 }}
+                        className="relative aspect-[9/16] max-h-[500px] w-full max-w-[300px] rounded-3xl overflow-hidden glass border border-white/10 shadow-[0_0_50px_rgba(0,163,255,0.1)]"
+                    >
+                        <video
+                            ref={videoRef}
+                            src="./manufacturing.MOV"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            className="w-full h-full object-cover opacity-80"
+                        />
+                    </motion.div>
+                </div>
             </div>
         </section>
     );

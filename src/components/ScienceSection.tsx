@@ -13,19 +13,24 @@ const ScienceSection: FC = () => {
                 >
                     <div className="text-accent-blue font-mono text-xs mb-4 flex items-center gap-2">
                         <span className="w-8 h-px bg-accent-blue" />
-                        Aerodynamics, deliberately constrained.
+                        AERODYNAMIC DOMAIN STUDY
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">ENGINEERED FOR <br /><span className="text-accent-blue">GROUND EFFECT</span></h2>
+                    <h2 className="text-4xl md:text-5xl font-black mb-6 uppercase tracking-tight">THE GROUND EFFECT <br /><span className="text-accent-blue">REGIME</span></h2>
                     <p className="text-white/60 leading-relaxed mb-8 font-light text-lg">
-                        FWISH is designed as a high-speed transport that operates within the ground-effect regime to preserve aerodynamic efficiency at elevated forward speeds. By flying within approximately one chord length of the surface, a high-pressure air cushion can form beneath the wing, reducing induced drag and reshaping the lift–drag balance.
-                        <br/><br/>
-                        This regime allows higher cruise speeds to be pursued without the proportional energy penalties typical of conventional free-flight aircraft. FWISH is engineered to leverage this aerodynamic advantage through controlled proximity to the surface, rather than relying solely on increased power.
+                        There is a forgotten boundary between the open ocean and the sky.
+                        WIG (Wing-In-Ground) craft operate in this interface, compressing air against the surface to generate high-efficiency lift.
+                        <br /><br />
+                        We are not inventing new physics; we are engineering hardware to stabilize this chaotic regime.
+                        Our focus is the "cushion"—the high-pressure volume that allows transport efficiency 3x greater than free-flight aircraft.
                     </p>
 
 
                 </motion.div>
 
-                <div className="relative h-[400px] glass rounded-3xl overflow-hidden border border-white/5 flex items-center justify-center">
+                <div className="relative h-[400px] glass rounded-3xl overflow-hidden border border-white/5 flex flex-col items-center justify-center">
+                    <div className="absolute top-4 left-4 font-mono text-[9px] text-white/30 uppercase tracking-widest">
+                        Fig 02. Chord-Dominant Flow Visualization
+                    </div>
                     {/* SVG Airflow Animation */}
                     <svg width="100%" height="100%" viewBox="-20 -20 440 340" className="opacity-80">
                         {/* Wing Profile */}

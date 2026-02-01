@@ -55,11 +55,11 @@ function App() {
       <main className="relative z-10">
         <HeroSection />
         <ModelSection />
+        <ManufacturingSection />
 
         <ScienceSection />
         <PressureSection />
         <SimulationSection />
-        <ManufacturingSection />
 
         <footer className="py-20 flex flex-col items-center border-t border-white/5 opacity-50 scroll-snap-align-start snap-start">
           <div className="text-[10px] font-mono mb-2 uppercase tracking-[1em]">FWISH Project</div>

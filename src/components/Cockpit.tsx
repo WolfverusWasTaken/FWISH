@@ -8,7 +8,7 @@ interface TelemetryProps {
     efficiency: number;
 }
 
-const sections = ['pre-flight', 'prototype-3d', 'science', 'pressure-viz', 'simulation', 'manufacturing'];
+const sections = ['pre-flight', 'prototype-3d', 'manufacturing', 'science', 'pressure-viz', 'simulation'];
 
 const Cockpit: FC<TelemetryProps> = () => {
     const scrollToSection = (direction: 'up' | 'down') => {

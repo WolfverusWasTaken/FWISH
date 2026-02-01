@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import React, { useMemo, useEffect, useState } from 'react'
+import React, { useMemo, useEffect } from 'react'
 import { useFrame, useLoader } from '@react-three/fiber'
 import { STLLoader } from 'three-stdlib'
 
@@ -14,18 +14,13 @@ export function FwishModel({
   ...props
 }: FwishModelProps) {
   const group = React.useRef<THREE.Group>(null)
-  const [isMobile, setIsMobile] = useState(false)
 
   // Load and optimize STL geometry
   const geometry = useLoader(STLLoader, modelPath)
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
-
     if (geometry) {
       // 1. Pivot Correction: Move the center of rotation to the volumetric center of the craft.
-      // This ensures that when you rotate, the model orbits around its geometric middle (wing/fuselage)
-      // rather than the tail or cockpit origin.
       geometry.computeBoundingBox()
       geometry.center()
       geometry.computeVertexNormals()
@@ -38,32 +33,21 @@ export function FwishModel({
     const baseColor = "#ffffff"
     const accentColor = "#00A3FF"
 
-    if (isMobile) {
-      // Optimized mobile shader with high-quality specular highlights
-      return new THREE.MeshPhongMaterial({
-        color: baseColor,
-        emissive: accentColor,
-        emissiveIntensity: 0.15,
-        shininess: 60,
-        specular: "#ffffff",
-        flatShading: false
-      })
-    }
-
     // High-end desktop shader with Clearcoat (for that polished carbon/epoxy look)
     return new THREE.MeshPhysicalMaterial({
       color: baseColor,
-      metalness: 0.6,
-      roughness: 0.2,
+      metalness: 0.7,
+      roughness: 0.15,
       clearcoat: 1.0,
-      clearcoatRoughness: 0.1,
+      clearcoatRoughness: 0.05,
       emissive: accentColor,
-      emissiveIntensity: 0.2,
+      emissiveIntensity: 0.25,
       reflectivity: 1.0,
-      iridescence: 0.1,
-      iridescenceIOR: 1.3,
+      iridescence: 0.3,
+      iridescenceIOR: 1.5,
+      thickness: 1.0,
     })
-  }, [isMobile])
+  }, [])
 
   // Elegant hover animation
   useFrame((state) => {
@@ -92,8 +76,8 @@ export function FwishModel({
     >
       <mesh
         geometry={geometry}
-        castShadow={!isMobile} // Disable shadows for better mobile FPS
-        receiveShadow={!isMobile}
+        castShadow
+        receiveShadow
         material={material}
       />
     </group>

@@ -26,11 +26,11 @@ const ModelSection: FC = () => {
                 <div className="flex items-center gap-4 mb-4">
                     <div className="w-2 h-2 rounded-full bg-accent-blue animate-pulse shadow-[0_0_15px_#00A3FF]" />
                     <div className="text-accent-blue font-mono text-[10px] md:text-[11px] tracking-[0.4em] md:tracking-[0.6em] uppercase opacity-70">
-                        Tactical Design Review // WIG-01
+                        Systems Engineering Review // WIG-01
                     </div>
                 </div>
                 <h2 className="text-4xl sm:text-6xl md:text-8xl font-black uppercase italic tracking-tighter leading-none text-white">
-                    Technical <span className="text-accent-blue">Prototype</span>
+                    Surface-Effect <span className="text-accent-blue">Probes</span>
                 </h2>
             </div>
 
@@ -43,9 +43,9 @@ const ModelSection: FC = () => {
 
                     <Canvas
                         shadows
-                        dpr={isMobile ? 1 : [1, 2]}
+                        dpr={[1, 2]}
                         camera={{ position: [6, 4, 10], fov: 35 }}
-                        gl={{ antialias: true }}
+                        gl={{ antialias: true, preserveDrawingBuffer: true }}
                     >
                         <Suspense
                             fallback={
@@ -57,15 +57,19 @@ const ModelSection: FC = () => {
                             }
                         >
                             <Environment
-                                preset={isMobile ? 'studio' : 'city'}
-                                environmentIntensity={0.5}
+                                preset="city"
+                                environmentIntensity={0.6}
                             />
 
-                            <ambientLight intensity={1.1} />
+                            <ambientLight intensity={0.4} color="#00A3FF" />
+                            <ambientLight intensity={0.5} />
+
                             <directionalLight
                                 position={[-5, 8, 4]}
-                                intensity={3}
-                                castShadow={!isMobile}
+                                intensity={3.5}
+                                castShadow
+                                shadow-mapSize={[1024, 1024]}
+                                shadow-bias={-0.0001}
                             />
                             <directionalLight
                                 position={[5, 3, -4]}
@@ -87,7 +91,7 @@ const ModelSection: FC = () => {
 
                             {/* 🔒 Fixed pivot */}
                             <group
-                                scale={isMobile ? 0.0008 : 0.001}
+                                scale={isMobile ? 0.0012 : 0.0015}
                                 position={MODEL_PIVOT}
                             >
                                 <FwishModel
@@ -98,10 +102,12 @@ const ModelSection: FC = () => {
 
                             <ContactShadows
                                 position={[0, -2.5, 0]}
-                                opacity={0.4}
+                                opacity={0.6}
                                 scale={20}
-                                blur={isMobile ? 4 : 2.5}
+                                blur={2.2}
                                 far={4.5}
+                                resolution={512}
+                                color="#000000"
                             />
                         </Suspense>
                     </Canvas>
@@ -129,9 +135,9 @@ const ModelSection: FC = () => {
 
                     <Canvas
                         shadows
-                        dpr={isMobile ? 1 : [1, 2]}
+                        dpr={[1, 2]}
                         camera={{ position: [6, 4, 10], fov: 35 }}
-                        gl={{ antialias: true }}
+                        gl={{ antialias: true, preserveDrawingBuffer: true }}
                     >
                         <Suspense
                             fallback={
@@ -143,15 +149,19 @@ const ModelSection: FC = () => {
                             }
                         >
                             <Environment
-                                preset={isMobile ? 'studio' : 'city'}
-                                environmentIntensity={0.5}
+                                preset="city"
+                                environmentIntensity={0.6}
                             />
 
-                            <ambientLight intensity={1.1} />
+                            <ambientLight intensity={0.4} color="#00A3FF" />
+                            <ambientLight intensity={0.5} />
+
                             <directionalLight
                                 position={[-5, 8, 4]}
-                                intensity={3}
-                                castShadow={!isMobile}
+                                intensity={3.5}
+                                castShadow
+                                shadow-mapSize={[1024, 1024]}
+                                shadow-bias={-0.0001}
                             />
                             <directionalLight
                                 position={[5, 3, -4]}
@@ -167,13 +177,13 @@ const ModelSection: FC = () => {
                                 target={[0, 0, 0]}
                                 makeDefault
                                 enableDamping
-                                rotateSpeed={0.6}
+                                rotateSpeed={0.8}
                                 zoomSpeed={1.2}
                             />
 
                             {/* 🔒 Same pivot */}
                             <group
-                                scale={isMobile ? 0.0008 : 0.001}
+                                scale={isMobile ? 0.0012 : 0.0015}
                                 position={MODEL_PIVOT}
                             >
                                 <FwishModel
@@ -184,10 +194,12 @@ const ModelSection: FC = () => {
 
                             <ContactShadows
                                 position={[0, -2.5, 0]}
-                                opacity={0.4}
+                                opacity={0.6}
                                 scale={20}
-                                blur={isMobile ? 4 : 2.5}
+                                blur={2.2}
                                 far={4.5}
+                                resolution={512}
+                                color="#000000"
                             />
                         </Suspense>
                     </Canvas>
