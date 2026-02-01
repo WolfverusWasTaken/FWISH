@@ -1,4 +1,4 @@
-import { type FC, Suspense, useState, useEffect } from 'react';
+import { type FC, Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, ContactShadows, Environment, Html } from '@react-three/drei';
 import { FwishModel } from './three/FwishModel';
@@ -7,26 +7,17 @@ import { FwishModel } from './three/FwishModel';
 const MODEL_PIVOT: [number, number, number] = [0, -0.28, 0];
 
 const ModelSection: FC = () => {
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 768);
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
-
     return (
         <section
             id="prototype-3d"
-            className="min-h-screen bg-black flex flex-col p-4 items-center justify-center"
+            className="min-h-screen bg-black flex flex-col p-4 items-center justify-center font-sans"
         >
             {/* Header */}
             <div className="w-full max-w-[1200px] mb-6 md:mb-8 text-center">
                 <div className="flex items-center justify-center gap-4 mb-2">
                     <div className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse shadow-[0_0_15px_#00A3FF]" />
                     <div className="text-accent-blue font-mono text-[9px] md:text-[10px] tracking-[0.4em] uppercase opacity-70">
-                        Systems Engineering Review // WIG-01
+                        Systems Engineering Review // PROTOTYPES
                     </div>
                 </div>
                 <h2 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase italic tracking-tighter leading-none text-white">
@@ -87,11 +78,12 @@ const ModelSection: FC = () => {
                                 enableDamping
                                 rotateSpeed={0.8}
                                 zoomSpeed={1.2}
+                                enableRotate={true}
                             />
 
-                            {/* 🔒 Fixed pivot */}
+                            {/* 🔒 Full Scale on all platforms */}
                             <group
-                                scale={isMobile ? 0.0012 : 0.0015}
+                                scale={0.0015}
                                 position={MODEL_PIVOT}
                             >
                                 <FwishModel
@@ -176,11 +168,12 @@ const ModelSection: FC = () => {
                                 enableDamping
                                 rotateSpeed={0.8}
                                 zoomSpeed={1.2}
+                                enableRotate={true}
                             />
 
-                            {/* 🔒 Same pivot */}
+                            {/* 🔒 Full Scale on all platforms */}
                             <group
-                                scale={isMobile ? 0.0012 : 0.0015}
+                                scale={0.0015}
                                 position={MODEL_PIVOT}
                             >
                                 <FwishModel
