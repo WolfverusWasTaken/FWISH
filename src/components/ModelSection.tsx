@@ -221,7 +221,7 @@ const ModelSection: FC = () => {
                 <span className="max-w-md text-center md:text-left leading-relaxed lowercase first-letter:uppercase">
                     *Experimental configurations for geometry & integration study only. Not final production hardware.
                 </span>
-                <span>© 2026 DESIGN BUREAU 42</span>
+                <span>© 2026 DESIGN BUREAU</span>
             </div>
         </section>
     );

@@ -2,6 +2,8 @@ import React, { type FC } from 'react';
 import { motion } from 'framer-motion';
 import buildingImg from '../assets/Model_V0_building.jpg';
 
+
+
 const ManufacturingSection: FC = () => {
     const videoRef = React.useRef<HTMLVideoElement>(null);
 
@@ -16,16 +18,22 @@ const ManufacturingSection: FC = () => {
             {/* Background Narrative Image */}
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <motion.div
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    whileInView={{ opacity: 0.7, scale: 1 }}
+                    initial={{ opacity: 0, scale: 1.1 }}
+                    whileInView={{ opacity: 0.7, scale: 1.05 }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                     className="w-full h-full"
                 >
                     <img
                         src={buildingImg}
                         alt=""
-                        className="w-full h-full object-cover object-center grayscale opacity-60"
+                        className="
+                            w-full h-full
+                            object-cover
+                            object-[15%_75%] md:object-[35%_75%]
+                            grayscale opacity-60
+                            "
                     />
+
                     {/* Gradient Blending Masks - Softened */}
                     <div className="absolute inset-0 bg-gradient-to-r from-black via-black/20 to-transparent" />
                     <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />

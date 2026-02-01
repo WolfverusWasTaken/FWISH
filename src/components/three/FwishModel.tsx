@@ -49,15 +49,24 @@ export function FwishModel({
     })
   }, [])
 
-  // Elegant hover animation
+  // 2. Video-Game Style Animation: Slow Spin + Character Select Bounce
   useFrame((state) => {
     if (group.current) {
       const t = state.clock.getElapsedTime()
-      group.current.position.y = Math.sin(t) * 0.03
+
+      // Slow rotation (around World Y)
+      group.current.rotation.y = t * 0.5
+
+      // Rhythmic Bounce (Character Select style)
+      // We use Math.abs(Math.sin) for a "snappy" landing effect, or a high-freq sine for a floaty bounce
+      group.current.position.y = Math.sin(t * 1.5) * 0.15
+
+      // Add a slight tilt oscillation for extra "life"
+      group.current.rotation.x = Math.sin(t * 0.5) * 0.05
     }
   })
 
-  // Initial orientation
+  // Initial orientation (applied to the inner geometry container)
   const getInitialRotation = (): [number, number, number] => {
     switch (viewType) {
       case 'top': return [-Math.PI / 2, 0, 0]
@@ -68,18 +77,15 @@ export function FwishModel({
   }
 
   return (
-    <group
-      ref={group}
-      rotation={getInitialRotation()}
-      dispose={null}
-      {...props}
-    >
-      <mesh
-        geometry={geometry}
-        castShadow
-        receiveShadow
-        material={material}
-      />
+    <group ref={group} dispose={null} {...props}>
+      <group rotation={getInitialRotation()}>
+        <mesh
+          geometry={geometry}
+          castShadow
+          receiveShadow
+          material={material}
+        />
+      </group>
     </group>
   )
 }
