@@ -19,18 +19,18 @@ const Header: FC<HeaderProps> = ({ currentView, onViewChange }) => {
     };
 
     return (
-        <header className="fixed top-0 left-0 w-full z-[100] px-4 py-6 md:px-12 md:py-8 flex items-center justify-between pointer-events-none">
-            {/* Branding - Left Anchor */}
-            <div className="flex-1 flex justify-start pointer-events-auto">
+        <header className="fixed top-0 left-0 w-full z-[100] px-4 pt-4 pb-2 md:px-12 md:py-8 flex flex-col md:flex-row items-center md:justify-between pointer-events-none gap-3 md:gap-0 transition-all duration-300">
+            {/* Branding - Order 2 on Mobile (Below Nav) */}
+            <div className="order-2 md:order-none flex-1 flex justify-center md:justify-start pointer-events-auto w-full md:w-auto">
                 <button
                     onClick={handleProjectClick}
-                    className="flex items-center gap-3 md:gap-4 group"
+                    className="flex items-center gap-2 md:gap-4 group"
                 >
                     <img
                         src={logo}
                         alt="FWISH Logo"
                         className="
-                            w-10 h-10
+                            w-8 h-8
                             md:w-14 md:h-14
                             object-contain
                             opacity-85
@@ -38,7 +38,7 @@ const Header: FC<HeaderProps> = ({ currentView, onViewChange }) => {
                             transition-opacity
                         "
                     />
-                    <div className="text-left hidden sm:block">
+                    <div className="text-left hidden sm:block md:block">
                         <div className="text-[10px] md:text-[11px] font-black tracking-[0.25em] text-white uppercase leading-none mb-1">
                             FWISH
                         </div>
@@ -46,19 +46,25 @@ const Header: FC<HeaderProps> = ({ currentView, onViewChange }) => {
                             Aerospace
                         </div>
                     </div>
+                    {/* Mobile Only Text (Simpler) */}
+                    <div className="text-left block sm:hidden md:hidden">
+                        <div className="text-[9px] font-black tracking-[0.2em] text-white uppercase leading-none">
+                            FWISH
+                        </div>
+                    </div>
                 </button>
             </div>
 
-            {/* Navigation - Absolute Center */}
-            <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto w-full max-w-fit">
-                <nav className="flex gap-2 md:gap-8 bg-black/60 backdrop-blur-xl px-4 md:px-8 py-2.5 md:py-3 rounded-full border border-white/10 shadow-2xl">
+            {/* Navigation - Order 1 on Mobile (Top) */}
+            <div className="order-1 md:order-none relative md:absolute md:left-1/2 md:top-1/2 md:-translate-x-1/2 md:-translate-y-1/2 pointer-events-auto w-auto max-w-fit z-20">
+                <nav className="flex gap-4 md:gap-8 bg-black/60 backdrop-blur-xl px-5 py-2 md:px-8 md:py-3 rounded-full border border-white/10 shadow-2xl">
                     {(['project', 'products', 'science', 'contact'] as const).map((view) => (
                         <button
                             key={view}
                             onClick={() => view === 'project' ? handleProjectClick() : onViewChange(view)}
-                            className={`font-mono text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.3em] transition-all px-1 ${currentView === view
-                                ? 'text-accent-blue'
-                                : 'text-white/40 hover:text-white'
+                            className={`font-mono text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.3em] transition-all px-0.5 ${currentView === view
+                                    ? 'text-accent-blue'
+                                    : 'text-white/40 hover:text-white'
                                 }`}
                         >
                             {view}

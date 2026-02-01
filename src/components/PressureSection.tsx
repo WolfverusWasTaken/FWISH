@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const PressureSection: FC = () => {
     return (
-        <section id="pressure-viz" className="min-h-screen py-32 flex flex-col items-center justify-center relative px-8 bg-black">
+        <section id="pressure-viz" className="w-full pt-4 pb-20 md:pb-32 flex flex-col items-center justify-center relative px-6 md:px-8 bg-black">
             <div className="max-w-3xl w-full">
                 {/* Text only research statement */}
                 <motion.div
