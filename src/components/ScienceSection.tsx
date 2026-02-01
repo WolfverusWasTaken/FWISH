@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const ScienceSection: FC = () => {
     return (
-        <section id="science" className="min-h-screen py-32 flex flex-col items-center justify-center relative px-8 bg-surface">
+        <section id="science" className="w-full py-20 flex flex-col items-center justify-center relative px-8">
             <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <motion.div
                     initial={{ opacity: 0, x: -50 }}

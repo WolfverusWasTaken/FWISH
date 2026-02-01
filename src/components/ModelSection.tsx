@@ -10,7 +10,7 @@ const ModelSection: FC = () => {
     return (
         <section
             id="prototype-3d"
-            className="min-h-screen bg-black flex flex-col p-4 items-center justify-center font-sans"
+            className="w-full flex flex-col p-4 items-center justify-center font-sans flex-grow"
         >
             {/* Header */}
             <div className="w-full max-w-[1200px] mb-6 md:mb-8 text-center">

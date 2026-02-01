@@ -1,24 +1,10 @@
 import { type FC } from 'react';
 import ModelSection from './ModelSection';
-import { motion } from 'framer-motion';
 
 const ProductsPage: FC = () => {
     return (
-        <div className="bg-black min-h-screen">
-            <main className="pt-40 md:pt-48 pb-20">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex flex-col items-center text-center px-8 mb-20"
-                >
-                    <h1 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-4">
-                        Ground-Effect <span className="text-accent-blue">Probes</span>
-                    </h1>
-                    <p className="text-white/40 font-mono text-xs md:text-sm max-w-xl tracking-[0.3em] uppercase leading-relaxed">
-                        Design variations for the logistics, research, and watersport sectors.
-                    </p>
-                </motion.div>
-
+        <div className="bg-black min-h-screen flex flex-col justify-between">
+            <main className="pt-20 md:pt-24 flex-grow flex flex-col justify-center">
                 <ModelSection />
             </main>
 

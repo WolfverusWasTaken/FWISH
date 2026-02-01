@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useScroll, useTransform, useSpring } from 'framer-motion';
 import HeroSection from './components/HeroSection';
-import ContactSection from './components/ContactSection';
+import ContactPage from './components/ContactPage';
 import ManufacturingSection from './components/ManufacturingSection';
 import Cockpit from './components/Cockpit';
 import SciencePage from './components/SciencePage';
@@ -9,7 +9,7 @@ import ProductsPage from './components/ProductsPage';
 import Header from './components/Header';
 
 function App() {
-  const [view, setView] = useState<'project' | 'science' | 'products'>('project');
+  const [view, setView] = useState<'project' | 'science' | 'products' | 'contact'>('project');
   const { scrollYProgress } = useScroll();
 
   // Smooth out the scroll values
@@ -19,17 +19,30 @@ function App() {
     restDelta: 0.001
   });
 
-  // Calculate Speed (0 to 240 KPH)
+  // Calculate Speed (0 to 120 KM/H)
   const [speed, setSpeed] = useState(0);
-  const speedValue = useTransform(smoothProgress, [0, 1], [0, 242]);
+  const speedValue = useTransform(smoothProgress, [0, 1], [0, 120]);
 
-  // Calculate Altitude (Starts at 20m, drops to 1.2m at Science section, then levels out)
-  const [altitude, setAltitude] = useState(20);
-  const altitudeValue = useTransform(smoothProgress, [0, 0.4, 0.5, 0.8, 1], [20, 15, 1.2, 0.8, 5]);
+  // Calculate Altitude:
+  // Starts ONLY when Speed > 80km/h.
+  // Speed 80 -> Alt 0. Speed 120 -> Alt 1.0.
+  const [altitude, setAltitude] = useState(0);
+  const altitudeValue = useTransform(speedValue, (currentSpeed) => {
+    if (currentSpeed < 80) return 0;
+    return ((currentSpeed - 80) / 40) * 0.6;
+  });
 
-  // Calculate Efficiency (L/D Ratio) - Spikes when altitude is low
-  const [efficiency, setEfficiency] = useState(8);
-  const efficiencyValue = useTransform(smoothProgress, [0, 0.45, 0.5, 0.7, 0.75, 1], [8, 12, 24.5, 22.1, 15, 12]);
+  // Calculate Efficiency (L/D Ratio):
+  // 0 Speed -> 0 Efficiency
+  // 0.1m Altitude -> Max Efficiency (80)
+  // >0.1m -> Efficiency drops as we leave ground effect
+  const [efficiency, setEfficiency] = useState(0);
+  const efficiencyValue = useTransform(altitudeValue, (alt) => {
+    if (alt <= 0.001) return 0; // On ground/static
+    if (alt <= 0.1) return (alt / 0.1) * 80; // Ramp up to peak at 0.1m
+    // Decay from 80 down to ~12 at 1.0m (standard aircraft L/D)
+    return 80 - ((alt - 0.1) / 0.9) * (80 - 12);
+  });
 
   // Sync state with motion values
   useEffect(() => {
@@ -41,27 +54,33 @@ function App() {
       unsubAlt();
       unsubEff();
     };
-  }, [speedValue, altitudeValue, efficiencyValue]);
+  }, [speedValue, altitudeValue]);
+
+  // Determine Telemetry Display Values (Mock Max for Products View)
+  const displaySpeed = view === 'products' ? 120 : speed;
+  const displayAltitude = view === 'products' ? 1.0 : altitude;
+  const displayEfficiency = view === 'products' ? 12.0 : efficiency;
 
   return (
     <div className="bg-black text-white selection:bg-accent-blue selection:text-black">
       <Header currentView={view} onViewChange={setView} />
 
       <Cockpit
-        speed={speed}
-        altitude={altitude}
-        efficiency={efficiency}
+        speed={displaySpeed}
+        altitude={displayAltitude}
+        efficiency={displayEfficiency}
       />
 
       {view === 'science' ? (
         <SciencePage />
       ) : view === 'products' ? (
         <ProductsPage />
+      ) : view === 'contact' ? (
+        <ContactPage />
       ) : (
-        <main className="relative z-10 min-h-[300vh]">
+        <main className="relative z-10 min-h-[180vh]">
           <HeroSection />
           <ManufacturingSection />
-          <ContactSection />
 
           <footer className="py-20 flex flex-col items-center border-t border-white/5 opacity-50 scroll-snap-align-start snap-start">
             <div className="text-[10px] font-mono mb-2 uppercase tracking-[1em]">FWISH AEROSPACE</div>
