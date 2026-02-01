@@ -4,7 +4,7 @@ import Cockpit from './components/Cockpit';
 import HeroSection from './components/HeroSection';
 import ModelSection from './components/ModelSection';
 import ScienceSection from './components/ScienceSection';
-import SimulationSection from './components/SimulationSection';
+import ContactSection from './components/ContactSection';
 import ManufacturingSection from './components/ManufacturingSection';
 import PressureSection from './components/PressureSection';
 
@@ -58,11 +58,11 @@ function App() {
         <PressureSection />
         <ScienceSection />
         <ModelSection />
-        <SimulationSection />
+        <ContactSection /> {/* Replaced SimulationSection with ContactSection */}
 
         <footer className="py-20 flex flex-col items-center border-t border-white/5 opacity-50 scroll-snap-align-start snap-start">
-          <div className="text-[10px] font-mono mb-2 uppercase tracking-[1em]">FWISH Project</div>
-          <div className="text-[8px] text-white/20">© 2026 DESIGN BUREAU 42. ALL FLIGHT SYSTEMS SECURED.</div>
+          <div className="text-[10px] font-mono mb-2 uppercase tracking-[1em]">FWISH AEROSPACE</div>
+          <div className="text-[8px] text-white/20">© 2026 FWISH AEROSPACE TECHNOLOGIES — GLOBAL TRANSPORT INFRASTRUCTURE.</div>
         </footer>
       </main>
 

@@ -108,7 +108,7 @@ const ModelSection: FC = () => {
                     <div className="absolute top-3 left-3 md:top-4 md:left-4 font-mono text-[7px] md:text-[8px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.3em] border-l border-accent-blue pl-2 pointer-events-none">
                         VARIANT_LOGISTIC
                         <br />
-                        REV: L-01 · VERIFIED
+                        REV: L-01
                     </div>
 
                     <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 text-right pointer-events-none">
@@ -198,7 +198,7 @@ const ModelSection: FC = () => {
                     <div className="absolute top-3 left-3 md:top-4 md:left-4 font-mono text-[7px] md:text-[8px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.3em] border-l border-accent-blue pl-2 pointer-events-none">
                         VARIANT_WATERSPORT
                         <br />
-                        REV: WS-01 · VERIFIED
+                        REV: WS-01
                     </div>
 
                     <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 text-right pointer-events-none">

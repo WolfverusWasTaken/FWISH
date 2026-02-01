@@ -31,7 +31,7 @@ const HeroSection: FC = () => {
 
                 {/* Identity Line */}
                 <h1 className="text-[9px] md:text-xs font-mono text-accent-blue/80 tracking-[0.45em] uppercase mb-3">
-                    Independent Design Bureau · Est. 2026
+                    Advanced Aerospace Technologies · Est. 2026
                 </h1>
 
                 {/* Title */}
@@ -46,13 +46,30 @@ const HeroSection: FC = () => {
 
                 {/* Classification — Technical Metadata */}
                 <p className="mt-4 text-accent-blue font-mono text-[11px] md:text-xs tracking-wide">
-                    Classification: Experimental Prove-Out
+                    Division: High-Speed Marine Transport
                 </p>
 
-                {/* Scroll Cue */}
-                <div className="mt-14 text-white/25 font-mono text-[10px] tracking-widest">
-                    ↓ Explore the work
-                </div>
+                {/* Optimized Scroll Action */}
+                <motion.button
+                    onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="mt-16 md:mt-20 px-8 py-3 relative group overflow-hidden border border-white/5 hover:border-accent-blue/30 transition-all duration-700"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 2, duration: 1 }}
+                >
+                    <div className="absolute inset-0 bg-accent-blue/0 group-hover:bg-accent-blue/[0.02] transition-colors" />
+
+                    {/* Animated Scanning Bar */}
+                    <motion.div
+                        className="absolute top-0 left-0 w-full h-[1px] bg-accent-blue/40"
+                        animate={{ top: ["0%", "100%", "0%"] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    />
+
+                    <span className="relative z-10 text-white/30 group-hover:text-white font-mono text-[9px] md:text-[10px] tracking-[0.5em] uppercase transition-colors">
+                        Explore Systems <span className="inline-block group-hover:translate-y-0.5 transition-transform">↓</span>
+                    </span>
+                </motion.button>
             </motion.div>
 
             {/* BACKGROUND TELEMETRY */}
