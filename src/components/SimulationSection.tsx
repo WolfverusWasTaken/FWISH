@@ -19,17 +19,31 @@ const SimulationSection: FC = () => {
                     transition={{ duration: 0.8 }}
                     className="px-4 font-mono"
                 >
-                    <div className="flex flex-col md:flex-row gap-8 items-start justify-between text-left">
-                        <div className="flex-1">
-                            <h3 className="text-xl font-black text-white uppercase mb-4 tracking-tight">Beyond This Prototype</h3>
-                            <p className="text-sm md:text-base text-white/60 leading-relaxed">
-                                FWISH is not the end goal. It is an engineering probe designed to spark a larger movement.
-                                We are laying the groundwork for a <span className="text-accent-blue">Foundation for Experimental Aerospace</span>—a dedicated collective for advanced transport and serious hardware culture.
+                    <div className="flex flex-col lg:flex-row gap-12 items-start justify-between text-left">
+                        {/* Vision Column */}
+                        <div className="flex-1 space-y-6">
+                            <h3 className="text-xl font-black text-white uppercase tracking-tight">Purpose & Vision</h3>
+                            <p className="text-sm text-white/60 leading-relaxed max-w-md">
+                                FWISH is a starting probe. The long-term goal is to establish a
+                                <span className="text-accent-blue font-bold"> Foundation for Experimental Aerospace</span>
+                                —a builder-led association for serious hardware engineering, open inquiry, and advanced transport research.
                             </p>
+
+                            <div className="pt-4">
+                                <h4 className="text-xs font-mono text-accent-blue uppercase tracking-widest mb-3">Who This Is For</h4>
+                                <ul className="text-sm text-white/50 space-y-2 font-mono">
+                                    <li>{">"} Academic Researchers (Aerodynamics / Controls)</li>
+                                    <li>{">"} Storage & Composite Manufacturers</li>
+                                    <li>{">"} Serious Makers & Hardware Engineers</li>
+                                    <li>{">"} Early-Stage Patrons of Science</li>
+                                </ul>
+                            </div>
                         </div>
-                        <div className="flex-1 border-l border-white/10 pl-6 space-y-4">
+
+                        {/* Connection Column */}
+                        <div className="flex-1 lg:max-w-md border-l border-white/10 pl-8 space-y-6">
                             <h3 className="text-xl font-black text-white uppercase mb-4 tracking-tight">Call for Collaboration</h3>
-                            <p className="text-sm md:text-base text-white/60 leading-relaxed font-mono">
+                            <p className="text-sm text-white/60 leading-relaxed font-mono">
                                 We are looking for:
                                 <br /> - University Research Partners (CFD/Aerodynamics)
                                 <br /> - Composite Manufacturing Specialists

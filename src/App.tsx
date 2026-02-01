@@ -54,11 +54,10 @@ function App() {
 
       <main className="relative z-10">
         <HeroSection />
-        <ModelSection />
         <ManufacturingSection />
-
-        <ScienceSection />
         <PressureSection />
+        <ScienceSection />
+        <ModelSection />
         <SimulationSection />
 
         <footer className="py-20 flex flex-col items-center border-t border-white/5 opacity-50 scroll-snap-align-start snap-start">

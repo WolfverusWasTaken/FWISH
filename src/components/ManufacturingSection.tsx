@@ -1,5 +1,6 @@
 import React, { type FC } from 'react';
 import { motion } from 'framer-motion';
+import buildingImg from '../assets/Model_V0_building.jpg';
 
 const ManufacturingSection: FC = () => {
     const videoRef = React.useRef<HTMLVideoElement>(null);
@@ -16,12 +17,12 @@ const ManufacturingSection: FC = () => {
             <div className="absolute inset-0 z-0 overflow-hidden">
                 <motion.div
                     initial={{ opacity: 0, scale: 1.05 }}
-                    whileInView={{ opacity: 0.7, scale: 1}}
+                    whileInView={{ opacity: 0.7, scale: 1 }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                     className="w-full h-full"
                 >
                     <img
-                        src="/assets/Model_V0_building.jpg"
+                        src={buildingImg}
                         alt=""
                         className="w-full h-full object-cover object-center grayscale opacity-60"
                     />
@@ -38,16 +39,17 @@ const ManufacturingSection: FC = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="text-accent-blue font-mono text-xs mb-4 flex items-center gap-2">
-                        <span className="w-8 h-px bg-accent-blue" />
-                        PROCESS VALIDATION
+                    <div className="text-accent-blue font-mono text-[10px] md:text-xs mb-3 md:mb-4 flex items-center gap-2">
+                        <span className="w-6 md:w-8 h-px bg-accent-blue" />
+                        WHAT FWISH IS
                     </div>
-                    <h2 className="text-4xl font-black mb-6 uppercase">Hardware-First <br /><span className="text-accent-blue">Loop</span></h2>
-                    <p className="text-white/60 leading-relaxed font-mono text-sm space-y-4">
-                        <span className="block">{">"} We don't just simulate. We cut, laminate, and fly.</span>
-                        <span className="block">{">"} In-house rapid prototyping pipeline for immediate flight data.</span>
-                        <span className="block">{">"} Validating the low-altitude regime requires physical risk-taking.</span>
-                        <span className="block">{">"} Building a culture of "Serious Play" in heavy engineering.</span>
+                    <h2 className="text-3xl md:text-4xl font-black mb-4 md:mb-6 uppercase">Systems <br /><span className="text-accent-blue">Engineering</span></h2>
+                    <p className="text-white/60 leading-relaxed font-mono text-xs md:text-sm space-y-3 md:space-y-4">
+                        <span className="block italic mb-3 md:mb-4">"A design-led exploration of the ground-effect regime."</span>
+                        <span className="block">{">"} FWISH is not a product. It is a systems engineering campaign.</span>
+                        <span className="block">{">"} We verify aerodynamics through rapid, hardware-rich iteration.</span>
+                        <span className="block">{">"} Our goal is to generate open verifyable data for low-altitude transport.</span>
+                        <span className="block">{">"} We cut, laminate, and fly to validate the physics.</span>
                     </p>
 
                 </motion.div>

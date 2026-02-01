@@ -19,32 +19,32 @@ const ModelSection: FC = () => {
     return (
         <section
             id="prototype-3d"
-            className="min-h-screen bg-black flex flex-col p-4 md:p-20 items-center justify-center"
+            className="min-h-screen bg-black flex flex-col p-4 items-center justify-center"
         >
             {/* Header */}
-            <div className="w-full max-w-[1200px] mb-8 md:mb-12">
-                <div className="flex items-center gap-4 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-accent-blue animate-pulse shadow-[0_0_15px_#00A3FF]" />
-                    <div className="text-accent-blue font-mono text-[10px] md:text-[11px] tracking-[0.4em] md:tracking-[0.6em] uppercase opacity-70">
+            <div className="w-full max-w-[1200px] mb-6 md:mb-8 text-center">
+                <div className="flex items-center justify-center gap-4 mb-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse shadow-[0_0_15px_#00A3FF]" />
+                    <div className="text-accent-blue font-mono text-[9px] md:text-[10px] tracking-[0.4em] uppercase opacity-70">
                         Systems Engineering Review // WIG-01
                     </div>
                 </div>
-                <h2 className="text-4xl sm:text-6xl md:text-8xl font-black uppercase italic tracking-tighter leading-none text-white">
-                    Surface-Effect <span className="text-accent-blue">Probes</span>
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-black uppercase italic tracking-tighter leading-none text-white">
+                    Ground-Effect <span className="text-accent-blue">Probes</span>
                 </h2>
             </div>
 
             {/* Dual Viewports */}
-            <div className="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8 px-2 md:px-0">
+            <div className="w-full max-w-[1400px] grid grid-cols-1 lg:grid-cols-2 gap-4 px-4 md:px-8">
 
                 {/* ================= LOGISTIC MODEL ================= */}
-                <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+                <div className="aspect-video relative border border-white/10 bg-black/20 rounded-xl overflow-hidden shadow-2xl">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
 
                     <Canvas
                         shadows
                         dpr={[1, 2]}
-                        camera={{ position: [6, 4, 10], fov: 35 }}
+                        camera={{ position: [6, 4, 10], fov: 30 }}
                         gl={{ antialias: true, preserveDrawingBuffer: true }}
                     >
                         <Suspense
@@ -113,30 +113,27 @@ const ModelSection: FC = () => {
                     </Canvas>
 
                     {/* Overlay UI */}
-                    <div className="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[8px] md:text-[9px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.4em] border-l border-accent-blue pl-2 md:pl-3 pointer-events-none">
+                    <div className="absolute top-3 left-3 md:top-4 md:left-4 font-mono text-[7px] md:text-[8px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.3em] border-l border-accent-blue pl-2 pointer-events-none">
                         VARIANT_LOGISTIC
                         <br />
-                        REV: L-01 · DESIGN-VERIFIED · 2026-01
+                        REV: L-01 · VERIFIED
                     </div>
 
-                    <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-right pointer-events-none">
-                        <div className="text-accent-blue font-mono text-[9px] md:text-[10px] mb-1 tracking-widest md:tracking-[0.3em] font-bold uppercase">
-                            Logistic Transport Model
-                        </div>
-                        <div className="text-white/20 text-[7px] md:text-[8px] font-mono leading-relaxed uppercase tracking-widest md:tracking-[0.2em]">
-                            Bulk Cargo Configuration
+                    <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 text-right pointer-events-none">
+                        <div className="text-accent-blue font-mono text-[8px] md:text-[9px] mb-0.5 tracking-widest font-bold uppercase">
+                            Logistic Transport
                         </div>
                     </div>
                 </div>
 
                 {/* ================= WATERSPORT MODEL ================= */}
-                <div className="aspect-[4/3] lg:aspect-square relative border border-white/10 bg-black/20 rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+                <div className="aspect-video relative border border-white/10 bg-black/20 rounded-xl overflow-hidden shadow-2xl">
                     <div className="absolute inset-0 bg-gradient-to-b from-white/[0.05] to-transparent pointer-events-none" />
 
                     <Canvas
                         shadows
                         dpr={[1, 2]}
-                        camera={{ position: [6, 4, 10], fov: 35 }}
+                        camera={{ position: [6, 4, 10], fov: 30 }}
                         gl={{ antialias: true, preserveDrawingBuffer: true }}
                     >
                         <Suspense
@@ -205,26 +202,25 @@ const ModelSection: FC = () => {
                     </Canvas>
 
                     {/* Overlay UI */}
-                    <div className="absolute top-4 left-4 md:top-6 md:left-6 font-mono text-[8px] md:text-[9px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.4em] border-l border-accent-blue pl-2 md:pl-3 pointer-events-none">
+                    <div className="absolute top-3 left-3 md:top-4 md:left-4 font-mono text-[7px] md:text-[8px] text-accent-blue/80 uppercase tracking-widest md:tracking-[0.3em] border-l border-accent-blue pl-2 pointer-events-none">
                         VARIANT_WATERSPORT
                         <br />
-                        REV: WS-01 · DESIGN-VERIFIED · 2026-01
+                        REV: WS-01 · VERIFIED
                     </div>
 
-                    <div className="absolute bottom-4 right-4 md:bottom-6 md:right-6 text-right pointer-events-none">
-                        <div className="text-accent-blue font-mono text-[9px] md:text-[10px] mb-1 tracking-widest md:tracking-[0.3em] font-bold uppercase">
-                            One Seater Watersport Model
-                        </div>
-                        <div className="text-white/20 text-[7px] md:text-[8px] font-mono leading-relaxed uppercase tracking-widest md:tracking-[0.2em]">
-                            Personal Agility Platform
+                    <div className="absolute bottom-3 right-3 md:bottom-4 md:right-4 text-right pointer-events-none">
+                        <div className="text-accent-blue font-mono text-[8px] md:text-[9px] mb-0.5 tracking-widest font-bold uppercase">
+                            Agility Platform
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* Footer */}
-            <div className="w-full max-w-[1200px] mt-12 pt-8 border-t border-white/5 flex justify-between items-center opacity-30 font-mono text-[9px] uppercase tracking-[0.5em] text-white">
-                <span>INTERNAL DESIGN STUDY</span>
+            <div className="w-full max-w-[1200px] mt-8 pt-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center opacity-40 font-mono text-[8px] uppercase tracking-[0.2em] text-white gap-2">
+                <span className="max-w-md text-center md:text-left leading-relaxed lowercase first-letter:uppercase">
+                    *Experimental configurations for geometry & integration study only. Not final production hardware.
+                </span>
                 <span>© 2026 DESIGN BUREAU 42</span>
             </div>
         </section>

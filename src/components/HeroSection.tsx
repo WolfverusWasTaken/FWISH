@@ -19,16 +19,16 @@ const HeroSection: FC = () => {
                     <div className="absolute inset-0 rounded-full border border-accent-blue/30 animate-pulse" />
                 </div>
 
-                <h1 className="text-sm font-mono text-accent-blue tracking-[0.6em] uppercase mb-4">
+                <h1 className="text-[10px] md:text-sm font-mono text-accent-blue tracking-[0.4em] md:tracking-[0.6em] uppercase mb-4">
                     Research Bureau 42 // EST. 2026
                 </h1>
 
-                <h2 className="text-6xl md:text-9xl font-black text-white tracking-tighter mb-6 relative">
+                <h2 className="text-5xl md:text-9xl font-black text-white tracking-tighter mb-6 relative leading-none">
                     PROJECT <span className="stroke-text-transparent">FWISH</span>
                 </h2>
 
                 <p className="max-w-2xl text-white/50 text-base md:text-lg font-light leading-relaxed font-mono">
-                    <span className="text-accent-blue">Classification:</span> Experimental Surface-Effect Prove-Out.
+                    <span className="text-accent-blue">Classification:</span> Experimental Ground-Effect Prove-Out.
                     <br />
                     <span className="block mt-4">
                         We are probing the forgotten regime of aerodynamic ground effect.
