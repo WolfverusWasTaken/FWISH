@@ -17,8 +17,7 @@ const Cockpit: FC<TelemetryProps> = ({
     speed,
     altitude,
     efficiency,
-    regime,
-    windConditions
+    regime
 }) => {
     // Efficiency color based on value
     const getEfficiencyColor = () => {
@@ -27,9 +26,6 @@ const Cockpit: FC<TelemetryProps> = ({
         if (efficiency < 110) return 'text-accent-green';
         return 'text-accent-green animate-pulse';
     };
-
-    // Wind direction arrow rotation
-    const windArrowRotation = windConditions ? windConditions.direction : 0;
 
     return (
         <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:bottom-10 md:left-10 md:translate-x-0 z-[100] pointer-events-none font-mono">
@@ -41,8 +37,8 @@ const Cockpit: FC<TelemetryProps> = ({
                     <div className="hidden md:block space-y-1 mb-2">
                         <div className="text-[7px] text-white/30 uppercase tracking-[0.2em]">Regime</div>
                         <div className={`text-[10px] font-bold uppercase tracking-widest transition-all duration-300 ${regime === 'OPTIMUM GROUND EFFECT'
-                                ? 'text-accent-green animate-pulse'
-                                : 'text-accent-blue'
+                            ? 'text-accent-green animate-pulse'
+                            : 'text-accent-blue'
                             }`}>
                             {regime}
                         </div>
