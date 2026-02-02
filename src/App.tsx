@@ -206,8 +206,8 @@ function App() {
      Regime detection
   --------------------------------------------- */
   const regime = useMemo(() => {
-    if (speed < 80) return 'GROUND RUN'
-    if (speed >= 80 && altitude < 0.2) return 'OPTIMUM GROUND EFFECT'
+    if (speed < 80 && altitude <0.1) return 'GROUND RUN'
+    if (speed >= 70 && altitude < 0.2) return 'OPTIMUM GROUND EFFECT'
     if (altitude >= 0.4) return 'GROUND EFFECT'
     return 'TRANSITION'
   }, [speed, altitude])
