@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { useScroll, useTransform, useSpring } from 'framer-motion'
+import { useState, useEffect, useMemo } from 'react'
+import { useScroll, useSpring, useMotionValue } from 'framer-motion'
 
 import HeroSection from './components/HeroSection'
 import ContactPage from './components/ContactPage'
@@ -9,34 +9,74 @@ import SciencePage from './components/SciencePage'
 import ProductsPage from './components/ProductsPage'
 import Header from './components/Header'
 
+/* ---------------------------------------------
+   Flight Narrative States per Page
+--------------------------------------------- */
+interface FlightState {
+  speedTarget: number
+  altitudeTarget: number
+  efficiencyTarget: number
+}
+
+const FLIGHT_STATES: Record<'project' | 'science' | 'products' | 'contact', FlightState> = {
+  // Pre-Takeoff: Slow ramp, no altitude
+  project: {
+    speedTarget: 40,
+    altitudeTarget: 0.00,
+    efficiencyTarget: 0, // Will be calculated based on speed
+  },
+  // Acceleration & Ground-Effect Entry
+  science: {
+    speedTarget: 80,
+    altitudeTarget: 0.10,
+    efficiencyTarget: 0, // Will be calculated
+  },
+  // Operational Envelope
+  products: {
+    speedTarget: 120,
+    altitudeTarget: 0.60,
+    efficiencyTarget: 0, // Will be calculated
+  },
+  // Cruise / Sustain
+  contact: {
+    speedTarget: 115,
+    altitudeTarget: 0.50,
+    efficiencyTarget: 0, // Will be calculated
+  },
+}
+
 function App() {
   const [view, setView] = useState<'project' | 'science' | 'products' | 'contact'>('project')
   const { scrollYProgress } = useScroll()
 
   /* ---------------------------------------------
-     Smooth scroll signal
+     Page-based target values
   --------------------------------------------- */
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+  const currentState = FLIGHT_STATES[view]
+
+  /* ---------------------------------------------
+     Motion values with smooth spring transitions
+  --------------------------------------------- */
+  const speedMotion = useMotionValue(0)
+  const altitudeMotion = useMotionValue(0)
+  const efficiencyMotion = useMotionValue(0)
+
+  const speedValue = useSpring(speedMotion, {
+    stiffness: 50,
+    damping: 25,
+    restDelta: 0.01,
+  })
+
+  const altitudeValue = useSpring(altitudeMotion, {
+    stiffness: 50,
+    damping: 25,
     restDelta: 0.001,
   })
 
-  /* ---------------------------------------------
-     SPEED (0 → 120 km/h)
-  --------------------------------------------- */
-  const [speed, setSpeed] = useState(0)
-  const speedValue = useTransform(smoothProgress, [0, 1], [0, 120])
-
-  /* ---------------------------------------------
-     ALTITUDE (ground-effect regime)
-     Starts increasing after ~80 km/h
-     Max visual altitude ~0.6 m
-  --------------------------------------------- */
-  const [altitude, setAltitude] = useState(0)
-  const altitudeValue = useTransform(speedValue, (v) => {
-    if (v < 80) return 0
-    return ((v - 80) / 40) * 0.6
+  const efficiencyValue = useSpring(efficiencyMotion, {
+    stiffness: 50,
+    damping: 25,
+    restDelta: 0.01,
   })
 
   /* ---------------------------------------------
@@ -48,48 +88,108 @@ function App() {
   }
 
   /* ---------------------------------------------
-     EFFICIENCY (L/D)
-     - Appears smoothly after 15 km/h
-     - Free stream L/D = 70
-     - ~77 at 1 m
-     - Ground-effect amplification near surface
-     - Realistic saturation
+     Calculate efficiency based on speed and altitude
   --------------------------------------------- */
-  const [efficiency, setEfficiency] = useState(0)
+  const calculateEfficiency = (speed: number, altitude: number): number => {
+    const FREE_STREAM = 70
+    const AT_1M = 77
+    const MAX_EFF = 125
 
-  const efficiencyValue = useTransform(
-    [speedValue, altitudeValue],
-    ([v, alt]: number[]) => {
-      const FREE_STREAM = 70
-      const AT_1M = 77
-      const MAX_EFF = 125
+    // Smooth activation: 15 → 20 km/h
+    const speedActivation = smoothstep(15, 20, speed)
+    if (speedActivation <= 0.001) return 0
 
-      /* Smooth activation: 10 → 20 km/h */
-      const speedActivation = smoothstep(10, 20, v)
-      if (speedActivation <= 0.001) return 0
+    // Clamp altitude for calculation
+    const h = Math.min(Math.max(altitude, 0.05), 1.0)
 
-      /* Clamp altitude */
-      const h = Math.min(Math.max(alt, 0.05), 1.0)
+    // Base efficiency ramp (70 → 77)
+    const baseEff = FREE_STREAM + (AT_1M - FREE_STREAM) * (1 - Math.min(h, 1))
 
-      /* Base efficiency ramp (70 → 77) */
-      const baseEff =
-        FREE_STREAM + (AT_1M - FREE_STREAM) * (1 - Math.min(h, 1))
+    // Ground-effect amplification (exponential, peaks at 0.15-0.25m)
+    const k = 2.5
+    const rawGain = Math.exp(k * (1 - h)) - 1
+    const maxGain = Math.exp(k * (1 - 0.05)) - 1
+    const gainNorm = rawGain / maxGain
 
-      /* Ground-effect amplification (exponential, normalized) */
-      const k = 2.0
-      const rawGain = Math.exp(k * (1 - h)) - 1
-      const maxGain = Math.exp(k * (1 - 0.05)) - 1
-      const gainNorm = rawGain / maxGain
+    const eff = baseEff + gainNorm * (MAX_EFF - AT_1M)
 
-      const eff = baseEff + gainNorm * (MAX_EFF - AT_1M)
-
-      return speedActivation * Math.min(eff, MAX_EFF)
-    }
-  )
+    return speedActivation * Math.min(eff, MAX_EFF)
+  }
 
   /* ---------------------------------------------
-     Sync motion values → state
+     Update targets when view changes
   --------------------------------------------- */
+  useEffect(() => {
+    const targetSpeed = currentState.speedTarget
+    const targetAltitude = currentState.altitudeTarget
+
+    speedMotion.set(targetSpeed)
+    altitudeMotion.set(targetAltitude)
+
+    // Calculate efficiency based on target values
+    const targetEfficiency = calculateEfficiency(targetSpeed, targetAltitude)
+    efficiencyMotion.set(targetEfficiency)
+  }, [view, currentState, speedMotion, altitudeMotion, efficiencyMotion])
+
+  /* ---------------------------------------------
+     Project page: slow scroll-based ramp (0 → 40 km/h)
+  --------------------------------------------- */
+  useEffect(() => {
+    if (view === 'project') {
+      const unsubScroll = scrollYProgress.on('change', (progress) => {
+        const scrollSpeed = progress * 40 // 0 → 40 km/h
+        speedMotion.set(scrollSpeed)
+        altitudeMotion.set(0) // Locked at ground
+
+        const eff = calculateEfficiency(scrollSpeed, 0)
+        efficiencyMotion.set(eff)
+      })
+
+      return () => unsubScroll()
+    }
+  }, [view, scrollYProgress, speedMotion, altitudeMotion, efficiencyMotion])
+
+  /* ---------------------------------------------
+     Subtle oscillations for realism (all pages)
+  --------------------------------------------- */
+  useEffect(() => {
+    // Skip oscillations on project page (uses scroll-based values)
+    if (view === 'project') return
+
+    let animationFrame: number
+    let time = 0
+
+    const animate = () => {
+      time += 0.016 // ~60fps
+
+      // Subtle speed oscillation (±2 km/h)
+      const speedOscillation = Math.sin(time * 0.8) * 2
+      speedMotion.set(currentState.speedTarget + speedOscillation)
+
+      // Subtle altitude oscillation (±0.03 m)
+      const altOscillation = Math.sin(time * 1.2) * 0.03
+      altitudeMotion.set(currentState.altitudeTarget + altOscillation)
+
+      // Recalculate efficiency with oscillations
+      const currentSpeed = currentState.speedTarget + speedOscillation
+      const currentAlt = currentState.altitudeTarget + altOscillation
+      const eff = calculateEfficiency(currentSpeed, currentAlt)
+      efficiencyMotion.set(eff)
+
+      animationFrame = requestAnimationFrame(animate)
+    }
+
+    animationFrame = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(animationFrame)
+  }, [view, currentState, speedMotion, altitudeMotion, efficiencyMotion])
+
+  /* ---------------------------------------------
+     State tracking for display
+  --------------------------------------------- */
+  const [speed, setSpeed] = useState(0)
+  const [altitude, setAltitude] = useState(0)
+  const [efficiency, setEfficiency] = useState(0)
+
   useEffect(() => {
     const unsubSpeed = speedValue.on('change', (v) => setSpeed(v))
     const unsubAlt = altitudeValue.on('change', (v) => setAltitude(v))
@@ -103,20 +203,24 @@ function App() {
   }, [speedValue, altitudeValue, efficiencyValue])
 
   /* ---------------------------------------------
-     Products page demo override
+     Regime detection
   --------------------------------------------- */
-  const displaySpeed = view === 'products' ? 120 : speed
-  const displayAltitude = view === 'products' ? 1.0 : altitude
-  const displayEfficiency = view === 'products' ? 70 : efficiency
+  const regime = useMemo(() => {
+    if (speed < 80) return 'GROUND RUN'
+    if (speed >= 80 && altitude < 0.2) return 'OPTIMUM GROUND EFFECT'
+    if (altitude >= 0.4) return 'GROUND EFFECT'
+    return 'TRANSITION'
+  }, [speed, altitude])
 
   return (
     <div className="bg-black text-white selection:bg-accent-blue selection:text-black">
       <Header currentView={view} onViewChange={setView} />
 
       <Cockpit
-        speed={displaySpeed}
-        altitude={displayAltitude}
-        efficiency={displayEfficiency}
+        speed={speed}
+        altitude={altitude}
+        efficiency={efficiency}
+        regime={regime}
       />
 
       {view === 'science' ? (
