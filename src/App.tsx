@@ -27,8 +27,8 @@ const FLIGHT_STATES: Record<'project' | 'science' | 'products' | 'contact', Flig
   },
   // Acceleration & Ground-Effect Entry
   science: {
-    speedTarget: 80,
-    altitudeTarget: 0.10,
+    speedTarget: 83,
+    altitudeTarget: 0.20,
     efficiencyTarget: 0, // Will be calculated
   },
   // Operational Envelope
@@ -207,7 +207,7 @@ function App() {
   --------------------------------------------- */
   const regime = useMemo(() => {
     if (speed < 80 && altitude <0.1) return 'GROUND RUN'
-    if (speed >= 70 && altitude < 0.2) return 'OPTIMUM GROUND EFFECT'
+    if (speed >= 80 && altitude < 0.3) return 'OPTIMUM GROUND EFFECT'
     if (altitude >= 0.4) return 'GROUND EFFECT'
     return 'TRANSITION'
   }, [speed, altitude])
