@@ -59,7 +59,7 @@ function App() {
 
   const efficiencyValue = useTransform(
     [speedValue, altitudeValue],
-    ([v, alt]) => {
+    ([v, alt]: number[]) => {
       const FREE_STREAM = 70
       const AT_1M = 77
       const MAX_EFF = 125
