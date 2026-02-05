@@ -107,7 +107,7 @@ const ContactPage: FC = () => {
                         {/* FOUNDERS SECTION */}
                         <div className="space-y-8 pt-4">
                             <h3 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight text-center">
-                                Founders
+                                Team
                             </h3>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-3xl mx-auto">
                                 <a href="https://www.linkedin.com/in/calwin-ang/" target="_blank" rel="noopener noreferrer" className="border border-white/5 py-4 px-2 bg-white/[0.02] text-[9px] text-white/40 uppercase tracking-[0.2em] hover:border-accent-blue/30 hover:text-accent-blue transition-all duration-500">
