@@ -28,7 +28,7 @@ const Cockpit: FC<TelemetryProps> = ({
     };
 
     return (
-        <div className="fixed bottom-4 left-1/2 -translate-x-1/2 md:bottom-10 md:left-10 md:translate-x-0 z-[100] pointer-events-none font-mono">
+        <div className="fixed bottom-4 left-0 w-full px-4 md:bottom-10 md:left-10 md:translate-x-0 z-[100] pointer-events-none font-mono">
             {/* Main telemetry container */}
             <div className="flex flex-row md:flex-col gap-4 md:gap-6 bg-black/60 md:bg-transparent backdrop-blur-lg md:backdrop-blur-none px-5 py-3 md:p-0 rounded-full md:rounded-none border border-white/10 md:border-none">
 
