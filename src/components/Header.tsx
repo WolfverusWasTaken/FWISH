@@ -43,7 +43,7 @@ const Header: FC<HeaderProps> = ({ currentView, onViewChange }) => {
                             FWISH
                         </div>
                         <div className="text-[7px] md:text-[8px] font-mono text-white/35 tracking-[0.15em] uppercase leading-none">
-                            Aerospace
+                            Technology
                         </div>
                     </div>
                     {/* Mobile Only Text (Simpler) */}
@@ -63,8 +63,8 @@ const Header: FC<HeaderProps> = ({ currentView, onViewChange }) => {
                             key={view}
                             onClick={() => view === 'project' ? handleProjectClick() : onViewChange(view)}
                             className={`font-mono text-[9px] md:text-[10px] uppercase tracking-[0.15em] md:tracking-[0.3em] transition-all px-0.5 ${currentView === view
-                                    ? 'text-accent-blue'
-                                    : 'text-white/40 hover:text-white'
+                                ? 'text-accent-blue'
+                                : 'text-white/40 hover:text-white'
                                 }`}
                         >
                             {view}

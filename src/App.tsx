@@ -28,7 +28,7 @@ const FLIGHT_STATES: Record<'project' | 'science' | 'products' | 'contact', Flig
   // Acceleration & Ground-Effect Entry
   science: {
     speedTarget: 83,
-    altitudeTarget: 0.20,
+    altitudeTarget: 0.15,
     efficiencyTarget: 0, // Will be calculated
   },
   // Operational Envelope
@@ -91,29 +91,17 @@ function App() {
      Calculate efficiency based on speed and altitude
   --------------------------------------------- */
   const calculateEfficiency = (speed: number, altitude: number): number => {
-    const FREE_STREAM = 70
-    const AT_1M = 77
-    const MAX_EFF = 125
-
     // Smooth activation: 15 → 20 km/h
     const speedActivation = smoothstep(15, 20, speed)
     if (speedActivation <= 0.001) return 0
 
-    // Clamp altitude for calculation
-    const h = Math.min(Math.max(altitude, 0.05), 1.0)
+    // L/D Increase Model (derived from user data)
+    // +27% at 0.1m, +7% at 0.6m
+    // Model: G(h) = 35.4 * exp(-2.7 * h)
+    const h = Math.max(altitude, 0)
+    const ldIncrease = 35.4 * Math.exp(-2.7 * h)
 
-    // Base efficiency ramp (70 → 77)
-    const baseEff = FREE_STREAM + (AT_1M - FREE_STREAM) * (1 - Math.min(h, 1))
-
-    // Ground-effect amplification (exponential, peaks at 0.15-0.25m)
-    const k = 2.5
-    const rawGain = Math.exp(k * (1 - h)) - 1
-    const maxGain = Math.exp(k * (1 - 0.05)) - 1
-    const gainNorm = rawGain / maxGain
-
-    const eff = baseEff + gainNorm * (MAX_EFF - AT_1M)
-
-    return speedActivation * Math.min(eff, MAX_EFF)
+    return speedActivation * ldIncrease
   }
 
   /* ---------------------------------------------
@@ -206,7 +194,7 @@ function App() {
      Regime detection
   --------------------------------------------- */
   const regime = useMemo(() => {
-    if (speed < 80 && altitude <0.1) return 'GROUND RUN'
+    if (speed < 80 && altitude < 0.1) return 'GROUND RUN'
     if (speed >= 80 && altitude < 0.3) return 'OPTIMUM GROUND EFFECT'
     if (altitude >= 0.4) return 'GROUND EFFECT'
     return 'TRANSITION'
@@ -236,10 +224,10 @@ function App() {
 
           <footer className="py-20 flex flex-col items-center border-t border-white/5 opacity-50">
             <div className="text-[10px] font-mono mb-2 uppercase tracking-[1em]">
-              FWISH AEROSPACE
+              FWISH TECHNOLOGY
             </div>
             <div className="text-[8px] text-white/20">
-              © 2025 FWISH AEROSPACE TECHNOLOGIES — GLOBAL TRANSPORT INFRASTRUCTURE.
+              © 2025 FWISH TECHNOLOGY — GLOBAL TRANSPORT INFRASTRUCTURE.
             </div>
           </footer>
         </main>

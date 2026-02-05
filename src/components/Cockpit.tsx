@@ -19,11 +19,11 @@ const Cockpit: FC<TelemetryProps> = ({
     efficiency,
     regime
 }) => {
-    // Efficiency color based on value
+    // Efficiency color based on value (now represents % gain)
     const getEfficiencyColor = () => {
-        if (efficiency < 70) return 'text-white/50';
-        if (efficiency < 90) return 'text-accent-blue';
-        if (efficiency < 110) return 'text-accent-green';
+        if (efficiency < 5) return 'text-white/50';
+        if (efficiency < 15) return 'text-accent-blue';
+        if (efficiency < 25) return 'text-accent-green';
         return 'text-accent-green animate-pulse';
     };
 
@@ -65,18 +65,18 @@ const Cockpit: FC<TelemetryProps> = ({
 
                 {/* Efficiency Telemetry with Enhanced Visualization */}
                 <div className="space-y-0 md:space-y-1">
-                    <div className="text-[7px] md:text-[9px] text-white/30 uppercase tracking-[0.2em]">Efficiency</div>
+                    <div className="text-[7px] md:text-[9px] text-white/30 uppercase tracking-[0.2em]">Efficiency Gain</div>
                     <div className="flex items-baseline gap-1 md:gap-2">
                         <span className={`text-lg md:text-2xl font-black leading-none transition-colors duration-300 ${getEfficiencyColor()}`}>
-                            {efficiency.toFixed(1)}
+                            {efficiency > 0 ? '+' : ''}{efficiency.toFixed(1)}
                         </span>
-                        <span className="text-[8px] md:text-[10px] text-accent-blue uppercase font-bold tracking-widest">L/D</span>
+                        <span className="text-[8px] md:text-[10px] text-accent-blue uppercase font-bold tracking-widest">%</span>
                     </div>
                     {/* Efficiency zones indicator */}
                     <div className="flex gap-[2px] mt-1">
-                        <div className={`h-[2px] w-4 md:w-5 transition-colors duration-300 ${efficiency >= 70 ? 'bg-accent-blue' : 'bg-white/10'}`} />
-                        <div className={`h-[2px] w-4 md:w-5 transition-colors duration-300 ${efficiency >= 90 ? 'bg-accent-green' : 'bg-white/10'}`} />
-                        <div className={`h-[2px] w-4 md:w-5 transition-colors duration-300 ${efficiency >= 110 ? 'bg-accent-green' : 'bg-white/10'}`} />
+                        <div className={`h-[2px] w-4 md:w-5 transition-colors duration-300 ${efficiency >= 5 ? 'bg-accent-blue' : 'bg-white/10'}`} />
+                        <div className={`h-[2px] w-4 md:w-5 transition-colors duration-300 ${efficiency >= 15 ? 'bg-accent-green' : 'bg-white/10'}`} />
+                        <div className={`h-[2px] w-4 md:w-5 transition-colors duration-300 ${efficiency >= 25 ? 'bg-accent-green' : 'bg-white/10'}`} />
                     </div>
                 </div>
             </div>
