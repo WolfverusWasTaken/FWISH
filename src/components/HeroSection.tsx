@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { motion } from 'framer-motion';
 
-import imgLogo from '../assets/Logo_nobackground.png';
+import imgLogo from '../assets/Logo_nobackground_name.png';
 import imgIcon from '../assets/icon_nobackground.png';
 
 const HeroSection: FC = () => {
