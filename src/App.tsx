@@ -21,7 +21,7 @@ interface FlightState {
 const FLIGHT_STATES: Record<'project' | 'science' | 'products' | 'contact', FlightState> = {
   // Pre-Takeoff: Slow ramp, no altitude
   project: {
-    speedTarget: 40,
+    speedTarget: 0,
     altitudeTarget: 0.00,
     efficiencyTarget: 0, // Will be calculated based on speed
   },
@@ -125,11 +125,20 @@ function App() {
   useEffect(() => {
     if (view === 'project') {
       const unsubScroll = scrollYProgress.on('change', (progress) => {
-        const scrollSpeed = progress * 40 // 0 → 40 km/h
+        const scrollSpeed = progress * 120 // 0 → 120 km/h
         speedMotion.set(scrollSpeed)
-        altitudeMotion.set(0) // Locked at ground
 
-        const eff = calculateEfficiency(scrollSpeed, 0)
+        // Equated Correlation: Altitude begins to ramp after transition speed (80 km/h)
+        // Ramps from 0.00m at 80 km/h to 0.60m at 120 km/h
+        const transitionSpeed = 80
+        const maxAlt = 0.60
+        const scrollAlt = scrollSpeed > transitionSpeed
+          ? ((scrollSpeed - transitionSpeed) / (120 - transitionSpeed)) * maxAlt
+          : 0
+
+        altitudeMotion.set(scrollAlt)
+
+        const eff = calculateEfficiency(scrollSpeed, scrollAlt)
         efficiencyMotion.set(eff)
       })
 
