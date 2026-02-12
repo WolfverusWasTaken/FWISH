@@ -55,15 +55,10 @@ const HeroSection: FC = () => {
                     PROJECT <span className="stroke-text-transparent">FWISH</span>
                 </h2>
 
-                {/* SIT Attribution */}
-                <h3 className="mt-4 text-[10px] md:text-xs font-mono text-accent-blue/70 tracking-[0.15em] md:tracking-[0.25em] uppercase px-4">
-                    a student led project from Singapore Institute of Technology
-                </h3>
-
                 {/* Mission Line */}
-                <h4 className="mt-4 text-sm md:text-xl font-medium text-white/80 tracking-tight px-4 max-w-xs md:max-w-none">
+                <h3 className="mt-3 text-sm md:text-xl font-medium text-white/80 tracking-tight px-4 max-w-xs md:max-w-none">
                     Making Ground-Effect Transport Operable, Stable, and Scalable
-                </h4>
+                </h3>
 
                 {/* Classification */}
                 <p className="mt-5 text-accent-blue font-mono text-[8px] md:text-xxs tracking-wide">
