@@ -39,8 +39,8 @@ const FLIGHT_STATES: Record<'project' | 'science' | 'products' | 'contact', Flig
   },
   // Cruise / Sustain
   contact: {
-    speedTarget: 115,
-    altitudeTarget: 0.50,
+    speedTarget: 85,
+    altitudeTarget: 0.20,
     efficiencyTarget: 0, // Will be calculated
   },
 }
@@ -95,13 +95,22 @@ function App() {
     const speedActivation = smoothstep(15, 20, speed)
     if (speedActivation <= 0.001) return 0
 
-    // L/D Increase Model (derived from user data)
-    // +27% at 0.1m, +7% at 0.6m
-    // Model: G(h) = 35.4 * exp(-2.7 * h)
-    const h = Math.max(altitude, 0)
-    const ldIncrease = 35.4 * Math.exp(-2.7 * h)
+    // NEW Correlation: Efficiency Gain to Altitude
+    // Based on user-provided L/D models
+    const hc = Math.max(altitude, 0.01) // Clamp to avoid division by zero/singularity
 
-    return speedActivation * ldIncrease
+    // (L/D)_infinity
+    const LD_inf = 0.398527 / 0.038366622
+
+    // L/D(h/c)
+    const numerator = 0.398527 + (0.027133 / Math.pow(hc, 0.676083))
+    const denominator = 0.038367 - (0.000285 / Math.pow(hc, 0.837902))
+    const LD_hc = numerator / denominator
+
+    // % Gain(h/c) = [ (L/D(h/c) - (L/D)_inf) / (L/D)_inf ] * 100
+    const percentGain = ((LD_hc - LD_inf) / LD_inf) * 100
+
+    return speedActivation * percentGain
   }
 
   /* ---------------------------------------------
@@ -158,18 +167,29 @@ function App() {
 
     const animate = () => {
       time += 0.016 // ~60fps
+      const scrollProgress = scrollYProgress.get()
 
-      // Subtle speed oscillation (±2 km/h)
+      // Define base targets based on view and scroll
+      let baseSpeed = currentState.speedTarget
+      let baseAlt = currentState.altitudeTarget
+
+      if (view === 'contact') {
+        // Contact page scroll reaction: 85 → 120 km/h, 0.20 → 0.60 m
+        baseSpeed = 85 + (scrollProgress * 35)
+        baseAlt = 0.20 + (scrollProgress * 0.40)
+      }
+
+      // Subtle oscillations (applied on top of base)
       const speedOscillation = Math.sin(time * 0.8) * 2
-      speedMotion.set(currentState.speedTarget + speedOscillation)
-
-      // Subtle altitude oscillation (±0.03 m)
       const altOscillation = Math.sin(time * 1.2) * 0.03
-      altitudeMotion.set(currentState.altitudeTarget + altOscillation)
 
-      // Recalculate efficiency with oscillations
-      const currentSpeed = currentState.speedTarget + speedOscillation
-      const currentAlt = currentState.altitudeTarget + altOscillation
+      const currentSpeed = baseSpeed + speedOscillation
+      const currentAlt = baseAlt + altOscillation
+
+      speedMotion.set(currentSpeed)
+      altitudeMotion.set(currentAlt)
+
+      // Recalculate efficiency with oscillations and dynamic baseline
       const eff = calculateEfficiency(currentSpeed, currentAlt)
       efficiencyMotion.set(eff)
 
@@ -178,7 +198,7 @@ function App() {
 
     animationFrame = requestAnimationFrame(animate)
     return () => cancelAnimationFrame(animationFrame)
-  }, [view, currentState, speedMotion, altitudeMotion, efficiencyMotion])
+  }, [view, currentState, speedMotion, altitudeMotion, efficiencyMotion, scrollYProgress])
 
   /* ---------------------------------------------
      State tracking for display

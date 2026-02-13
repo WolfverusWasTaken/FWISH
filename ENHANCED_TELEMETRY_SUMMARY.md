@@ -99,7 +99,26 @@ Users can now instantly understand:
 
 ---
 
-## ✅ Enhancement 4: Wind/Environmental Factors Display
+## ✅ Enhancement 4: Scientific Efficiency Model
+
+### Implementation
+Updated the correlation of efficiency gain to altitude using experimentally-derived L/D equations.
+
+### Technical Details
+```typescript
+// L/D(h/c) = (0.398527 + 0.027133/(h/c)^0.676083) / (0.038367 - 0.000285/(h/c)^0.837902)
+// (L/D)∞ = 0.398527 / 0.038366622
+// % Gain(h/c) = [ (L/D(h/c) − (L/D)∞) / (L/D)∞ ] × 100
+```
+
+### Behavior
+- **Physically Accurate**: Replaced the simplified exponential model with a more robust asymptotic L/D ratio correlation.
+- **Improved Sensitivity**: Capture realistic ground effect behavior at extremely low altitudes (h/c < 0.1).
+- **Asymptotic Convergence**: Correctly converges to free-stream performance as ground proximity decreases.
+
+---
+
+## ✅ Enhancement 5: Wind/Environmental Factors Display
 
 ### Implementation
 Added comprehensive environmental conditions display showing real-time wind data.
@@ -324,12 +343,13 @@ The system creates a more realistic flight simulation experience:
 
 ## Summary
 
-Successfully implemented all four requested enhancements:
+Successfully implemented all five requested enhancements:
 
 1. ✅ **Subtle oscillations on Contact page** - Realistic cruise dynamics
 2. ✅ **Historical telemetry graphs** - 50-point sparklines for all metrics
 3. ✅ **Detailed efficiency visualization** - Color-coded zones and indicators
-4. ✅ **Wind/environmental factors** - Comprehensive wind display with direction
+4. ✅ **Scientific Efficiency Model** - Accurate L/D correlation based on aerodynamic research
+5. ✅ **Wind/environmental factors** - Comprehensive wind display with direction
 
 The HUD system has evolved from a simple numeric display into a comprehensive flight data visualization platform that provides:
 - **Real-time feedback** on all flight parameters
